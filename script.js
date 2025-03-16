@@ -71,16 +71,15 @@ const levels = [
             { eq: "2x-7=-11", step1: "2x=-4", step2: "x=-2", hint1: "Add 7 to both sides.", hint2: "Divide both sides by 2." }
         ],
         multiStep: [
-            { eq: "2x+5=5x-4", step1: "5=3x-4", step2: "9=3x", step3: "x=3", hint1: "Subtract 2x from both sides.", hint2: "Add 4 to both sides.", hint3: "Divide both sides by 3." }, // Note: This has a positive answer; replacing with negative
             { eq: "3x+2=x-6", step1: "2x+2=-6", step2: "2x=-8", step3: "x=-4", hint1: "Subtract x from both sides.", hint2: "Subtract 2 from both sides.", hint3: "Divide both sides by 2." },
             { eq: "4x-3=7x+9", step1: "-3=3x+9", step2: "-12=3x", step3: "x=-4", hint1: "Subtract 4x from both sides.", hint2: "Subtract 9 from both sides.", hint3: "Divide both sides by 3." },
             { eq: "5x+1=2x-8", step1: "3x+1=-8", step2: "3x=-9", step3: "x=-3", hint1: "Subtract 2x from both sides.", hint2: "Subtract 1 from both sides.", hint3: "Divide both sides by 3." },
             { eq: "6x-4=3x-10", step1: "3x-4=-10", step2: "3x=-6", step3: "x=-2", hint1: "Subtract 3x from both sides.", hint2: "Add 4 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "2x+7=5x+1", step1: "7=3x+1", step2: "6=3x", step3: "x=2", hint1: "Subtract 2x from both sides.", hint2: "Subtract 1 from both sides.", hint3: "Divide both sides by 3." }, // Positive; replace
             { eq: "7x-2=4x-11", step1: "3x-2=-11", step2: "3x=-9", step3: "x=-3", hint1: "Subtract 4x from both sides.", hint2: "Add 2 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "3x+8=6x+2", step1: "8=3x+2", step2: "6=3x", step3: "x=2", hint1: "Subtract 3x from both sides.", hint2: "Subtract 2 from both sides.", hint3: "Divide both sides by 3." }, // Positive; replace
             { eq: "5x-6=2x-15", step1: "3x-6=-15", step2: "3x=-9", step3: "x=-3", hint1: "Subtract 2x from both sides.", hint2: "Add 6 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "4x+3=7x-3", step1: "3=3x-3", step2: "6=3x", step3: "x=2", hint1: "Subtract 4x from both sides.", hint2: "Add 3 to both sides.", hint3: "Divide both sides by 3." } // Positive; replace
+            { eq: "2x+8=5x-1", step1: "8=3x-1", step2: "9=3x", step3: "x=3", hint1: "Subtract 2x from both sides.", hint2: "Add 1 to both sides.", hint3: "Divide both sides by 3." }, // Positive; replace
+            { eq: "3x+5=6x-4", step1: "5=3x-4", step2: "9=3x", step3: "x=3", hint1: "Subtract 3x from both sides.", hint2: "Add 4 to both sides.", hint3: "Divide both sides by 3." }, // Positive; replace
+            { eq: "4x+2=7x-7", step1: "2=3x-7", step2: "9=3x", step3: "x=3", hint1: "Subtract 4x from both sides.", hint2: "Add 7 to both sides.", hint3: "Divide both sides by 3." } // Positive; replace
         ]
     }},
     { name: "3 (Fractions with Positive Answers)", problems: {
@@ -121,7 +120,7 @@ const levels = [
             { eq: "6x-1/3=4x+1", step1: "2x-1/3=1", step2: "2x=4/3", step3: "x=2/3", hint1: "Subtract 4x from both sides.", hint2: "Add 1/3 to both sides.", hint3: "Divide both sides by 2." }
         ]
     }},
-    { name: "4 (Mixed)", problems: {} } // Mixed will be populated dynamically
+    { name: "4 (Mixed)", problems: {} }
 ];
 
 levels[3].problems.oneStep = [...levels[0].problems.oneStep, ...levels[1].problems.oneStep, ...levels[2].problems.oneStep];
@@ -137,7 +136,7 @@ let currentOneStep, currentTwoStep, currentMultiStep, currentMixed;
 
 // Progress Tracker
 function updateProgress() {
-    document.getElementById('current-level').textContent = levels[currentLevel - 1].name;
+    document.getElementById('level-select').value = currentLevel;
     document.getElementById('one-step-progress').textContent = `${oneStepCorrect}/${streakThreshold}`;
     document.getElementById('two-step-progress').textContent = oneStepCorrect >= streakThreshold ? `${twoStepCorrect}/${streakThreshold}` : 'Locked';
     document.getElementById('multi-step-progress').textContent = twoStepCorrect >= streakThreshold ? `${multiStepCorrect}/${streakThreshold}` : 'Locked';
@@ -160,12 +159,22 @@ function resetGame() {
     updateProgress();
 }
 
-function animateScale(scaleId, state) {
-    const scale = document.getElementById(scaleId);
-    scale.classList.remove('tilt-left', 'tilt-right', 'balanced');
-    if (state === 'left') scale.classList.add('tilt-left');
-    else if (state === 'right') scale.classList.add('tilt-right');
-    else if (state === 'balanced') scale.classList.add('balanced');
+function changeLevel() {
+    currentLevel = parseInt(document.getElementById('level-select').value);
+    oneStepCorrect = 0;
+    twoStepCorrect = 0;
+    multiStepCorrect = 0;
+    mixedCorrect = 0;
+    streak = 0;
+    document.getElementById('one-step').classList.add('active');
+    document.getElementById('two-step').classList.remove('active');
+    document.getElementById('multi-step').classList.remove('active');
+    document.getElementById('mixed').classList.remove('active');
+    loadOneStepProblem();
+    loadTwoStepProblem();
+    loadMultiStepProblem();
+    loadMixedProblem();
+    updateProgress();
 }
 
 // One-Step Logic
@@ -175,7 +184,6 @@ function loadOneStepProblem() {
     document.getElementById('one-step-hint').textContent = currentOneStep.hint;
     document.querySelector('#one-step .left-side').textContent = currentOneStep.eq.split('=')[0];
     document.querySelector('#one-step .right-side').textContent = currentOneStep.eq.split('=')[1];
-    animateScale('one-step-scale', 'tilt-right'); // Initially unbalanced
 }
 
 function checkOneStep() {
@@ -186,7 +194,6 @@ function checkOneStep() {
         feedback.style.color = 'green';
         streak++;
         oneStepCorrect++;
-        animateScale('one-step-scale', 'balanced');
         if (streak >= streakThreshold) {
             document.getElementById('one-step').classList.remove('active');
             document.getElementById('two-step').classList.add('active');
@@ -201,11 +208,10 @@ function checkOneStep() {
     } else {
         const [left, right] = currentOneStep.eq.split('=');
         const op = currentOneStep.hint.includes('Subtract') ? '-' : currentOneStep.hint.includes('Add') ? '+' : '/';
-        const num = currentOneStep.hint.match(/\d+/) ? currentOneStep.hint.match(/\d+/)[0] : '';
+        const num = currentOneStep.hint.match(/\d+\/\d+|\d+/) ? currentOneStep.hint.match(/\d+\/\d+|\d+/)[0] : '';
         feedback.textContent = `Incorrect. You entered '${input}'. For ${left}=${right}, ${currentOneStep.hint.toLowerCase()} (${op === '/' ? right + op + num : num + op + right}) = ${currentOneStep.answer}.`;
         feedback.style.color = 'red';
         streak = 0;
-        animateScale('one-step-scale', 'tilt-left');
         updateProgress();
     }
 }
@@ -219,7 +225,6 @@ function loadTwoStepProblem() {
     document.getElementById('two-step-hint2').textContent = currentTwoStep.hint2;
     document.querySelector('#two-step .left-side').textContent = currentTwoStep.eq.split('=')[0];
     document.querySelector('#two-step .right-side').textContent = currentTwoStep.eq.split('=')[1];
-    animateScale('two-step-scale', 'tilt-right');
 }
 
 function checkTwoStep1() {
@@ -229,7 +234,6 @@ function checkTwoStep1() {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
         document.getElementById('two-step-step2').style.display = 'block';
-        animateScale('two-step-scale', 'tilt-left');
     } else {
         const [left, right] = currentTwoStep.eq.split('=');
         const op = currentTwoStep.hint1.includes('Subtract') ? '-' : '+';
@@ -247,7 +251,6 @@ function checkTwoStep2() {
         feedback.style.color = 'green';
         streak++;
         twoStepCorrect++;
-        animateScale('two-step-scale', 'balanced');
         if (streak >= streakThreshold) {
             document.getElementById('two-step').classList.remove('active');
             document.getElementById('multi-step').classList.add('active');
@@ -282,7 +285,6 @@ function loadMultiStepProblem() {
     document.getElementById('multi-step-hint3').textContent = currentMultiStep.hint3;
     document.querySelector('#multi-step .left-side').textContent = currentMultiStep.eq.split('=')[0];
     document.querySelector('#multi-step .right-side').textContent = currentMultiStep.eq.split('=')[1];
-    animateScale('multi-step-scale', 'tilt-right');
 }
 
 function checkMultiStep1() {
@@ -292,7 +294,6 @@ function checkMultiStep1() {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
         document.getElementById('multi-step-step2').style.display = 'block';
-        animateScale('multi-step-scale', 'tilt-left');
     } else {
         const [left, right] = currentMultiStep.eq.split('=');
         const term = currentMultiStep.hint1.match(/\d+x/) ? currentMultiStep.hint1.match(/\d+x/)[0] : '';
@@ -308,7 +309,6 @@ function checkMultiStep2() {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
         document.getElementById('multi-step-step3').style.display = 'block';
-        animateScale('multi-step-scale', 'tilt-right');
     } else {
         const [left, right] = currentMultiStep.step1.split('=');
         const op = currentMultiStep.hint2.includes('Add') ? '+' : '-';
@@ -326,7 +326,6 @@ function checkMultiStep3() {
         feedback.style.color = 'green';
         streak++;
         multiStepCorrect++;
-        animateScale('multi-step-scale', 'balanced');
         if (streak >= streakThreshold) {
             document.getElementById('multi-step').classList.remove('active');
             document.getElementById('mixed').classList.add('active');
@@ -358,7 +357,6 @@ function loadMixedProblem() {
     document.getElementById('mixed-eq').textContent = currentMixed.eq;
     document.querySelector('#mixed .left-side').textContent = currentMixed.eq.split('=')[0];
     document.querySelector('#mixed .right-side').textContent = currentMixed.eq.split('=')[1];
-    animateScale('mixed-scale', 'tilt-right');
 }
 
 function checkMixed() {
@@ -369,7 +367,6 @@ function checkMixed() {
         feedback.style.color = 'green';
         streak++;
         mixedCorrect++;
-        animateScale('mixed-scale', 'balanced');
         if (streak >= streakThreshold && currentLevel < 4) {
             currentLevel++;
             oneStepCorrect = 0;
@@ -395,7 +392,6 @@ function checkMixed() {
         feedback.textContent = `Incorrect. You entered '${input}'. The correct answer is '${currentMixed.answer}'.`;
         feedback.style.color = 'red';
         streak = 0;
-        animateScale('mixed-scale', 'tilt-left');
         updateProgress();
     }
 }
