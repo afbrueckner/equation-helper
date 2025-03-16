@@ -61,19 +61,6 @@ input {
     padding: 10px;
     border: 2px solid #ccc;
     border-radius: 5px;
-    transition: transform 0.5s ease;
-}
-
-.balance-scale.tilt-left {
-    transform: rotate(5deg);
-}
-
-.balance-scale.tilt-right {
-    transform: rotate(-5deg);
-}
-
-.balance-scale.balanced {
-    transform: rotate(0deg);
 }
 
 .left-side, .right-side {
@@ -81,4 +68,9 @@ input {
     background-color: #e0e0e0;
     border-radius: 5px;
     margin: 0 15px;
+}
+
+#level-select {
+    padding: 5px;
+    font-size: 16px;
 }
