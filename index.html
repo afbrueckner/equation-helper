@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equation Helper</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Lesson Section -->
+        <div id="lesson" class="section active">
+            <h1>Lesson: Solving x + 5 = 12</h1>
+            <p>Goal: Get <strong>x</strong> alone.</p>
+            <p>Step 1: What’s the opposite of adding 5?</p>
+            <button onclick="showStep('subtract')">Subtract 5</button>
+            <div id="step-result" style="display: none;">
+                <p>Now: <strong>x = 7</strong></p>
+                <button onclick="goToPractice()">Next: Practice</button>
+            </div>
+        </div>
 
+        <!-- Practice Section -->
+        <div id="practice" class="section">
+            <h1>Practice: Solve x - 3 = 8</h1>
+            <p>Enter your answer for <strong>x</strong>:</p>
+            <input type="number" id="practice-input">
+            <button onclick="checkPractice()">Check</button>
+            <p id="practice-feedback"></p>
+            <button onclick="goToChallenge()" style="display: none;" id="next-challenge">Next: Challenge</button>
+        </div>
+
+        <!-- Challenge Section -->
+        <div id="challenge" class="section">
+            <h1>Challenge: Solve 4x = 16</h1>
+            <p>Enter your answer for <strong>x</strong>:</p>
+            <input type="number" id="challenge-input">
+            <button onclick="checkChallenge()">Check</button>
+            <p id="challenge-feedback"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
