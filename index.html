@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equation Helper</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -26,10 +25,9 @@
                     <span class="left-side">x + 4</span> = <span class="right-side">10</span>
                 </div>
                 <p>Step: <span id="one-step-hint">Subtract 4 from both sides.</span></p>
-                <input type="number" id="one-step-input" placeholder="Enter x">
+                <input type="text" id="one-step-input" placeholder="Enter new equation (e.g., x = 6)">
                 <button onclick="checkOneStep()">Check</button>
                 <p id="one-step-feedback"></p>
-                <div id="one-step-canvas"></div>
             </div>
         </div>
 
@@ -37,21 +35,20 @@
         <div id="two-step" class="section">
             <h1>Two-Step Equations</h1>
             <div id="two-step-problem">
-                <p>Equation: <strong><span id="two-step-eq">2x + 5 = 11</span></strong></p>
+                <p>Equation: <strong><span id="two-step-eq">2x + 4 = 10</span></strong></p>
                 <div class="balance-scale">
-                    <span class="left-side">2x + 5</span> = <span class="right-side">11</span>
+                    <span class="left-side">2x + 4</span> = <span class="right-side">10</span>
                 </div>
-                <p>Step 1: <span id="two-step-hint1">Subtract 5 from both sides.</span></p>
-                <input type="number" id="two-step-input1" placeholder="Enter the new right side">
+                <p>Step 1: <span id="two-step-hint1">Subtract 4 from both sides.</span></p>
+                <input type="text" id="two-step-input1" placeholder="Enter new equation (e.g., 2x = 6)">
                 <button onclick="checkTwoStep1()">Check</button>
                 <p id="two-step-feedback1"></p>
                 <div id="two-step-step2" style="display: none;">
-                    <p>Equation: <strong><span id="two-step-eq2">2x = 6</span></strong></p>
-                    <p>Step 2: <span id="two-step-hint2">Divide both sides by 2.</span></p> <!-- Dynamic hint -->
-                    <input type="number" id="two-step-input2" placeholder="Enter x">
+                    <p>Equation: <strong><span id="two-step-eq2"></span></strong></p>
+                    <p>Step 2: <span id="two-step-hint2"></span></p>
+                    <input type="text" id="two-step-input2" placeholder="Enter new equation (e.g., x = 3)">
                     <button onclick="checkTwoStep2()">Check</button>
                     <p id="two-step-feedback2"></p>
-                    <div id="two-step-canvas"></div>
                 </div>
             </div>
         </div>
@@ -65,22 +62,21 @@
                     <span class="left-side">2x + 3</span> = <span class="right-side">5x - 6</span>
                 </div>
                 <p>Step 1: Subtract 2x from both sides.</p>
-                <input type="number" id="multi-step-input1" placeholder="Enter the new right side">
+                <input type="text" id="multi-step-input1" placeholder="Enter new equation (e.g., 3 = 3x - 6)">
                 <button onclick="checkMultiStep1()">Check</button>
                 <p id="multi-step-feedback1"></p>
                 <div id="multi-step-step2" style="display: none;">
-                    <p>Equation: <strong><span id="multi-step-eq2">3 = 3x - 6</span></strong></p>
+                    <p>Equation: <strong><span id="multi-step-eq2"></span></strong></p>
                     <p>Step 2: Add 6 to both sides.</p>
-                    <input type="number" id="multi-step-input2" placeholder="Enter the new right side">
+                    <input type="text" id="multi-step-input2" placeholder="Enter new equation (e.g., 9 = 3x)">
                     <button onclick="checkMultiStep2()">Check</button>
                     <p id="multi-step-feedback2"></p>
                     <div id="multi-step-step3" style="display: none;">
-                        <p>Equation: <strong><span id="multi-step-eq3">9 = 3x</span></strong></p>
+                        <p>Equation: <strong><span id="multi-step-eq3"></span></strong></p>
                         <p>Step 3: Divide both sides by 3.</p>
-                        <input type="number" id="multi-step-input3" placeholder="Enter x">
+                        <input type="text" id="multi-step-input3" placeholder="Enter new equation (e.g., x = 3)">
                         <button onclick="checkMultiStep3()">Check</button>
                         <p id="multi-step-feedback3"></p>
-                        <div id="multi-step-canvas"></div>
                     </div>
                 </div>
             </div>
