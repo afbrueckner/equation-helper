@@ -11,7 +11,14 @@
         <!-- Progress Tracker -->
         <div id="progress-tracker">
             <h2>Progress</h2>
-            <p>Level: <span id="current-level">1 (Positive Answers)</span></p>
+            <p>Level: 
+                <select id="level-select" onchange="changeLevel()">
+                    <option value="1">1 (Positive Answers)</option>
+                    <option value="2">2 (Negative Answers)</option>
+                    <option value="3">3 (Fractions with Positive Answers)</option>
+                    <option value="4">4 (Mixed)</option>
+                </select>
+            </p>
             <p>Stage 1 (One-Step): <span id="one-step-progress">0/5</span></p>
             <p>Stage 2 (Two-Step): <span id="two-step-progress">Locked</span></p>
             <p>Stage 3 (Multi-Step): <span id="multi-step-progress">Locked</span></p>
@@ -25,7 +32,7 @@
             <h1>Stage 1: One-Step Equations</h1>
             <div id="one-step-problem">
                 <p>Equation: <strong><span id="one-step-eq">x+4=10</span></strong></p>
-                <div class="balance-scale" id="one-step-scale">
+                <div class="balance-scale">
                     <span class="left-side">x+4</span> = <span class="right-side">10</span>
                 </div>
                 <p>Step: <span id="one-step-hint">Subtract 4 from both sides.</span></p>
@@ -40,7 +47,7 @@
             <h1>Stage 2: Two-Step Equations</h1>
             <div id="two-step-problem">
                 <p>Equation: <strong><span id="two-step-eq">2x+4=10</span></strong></p>
-                <div class="balance-scale" id="two-step-scale">
+                <div class="balance-scale">
                     <span class="left-side">2x+4</span> = <span class="right-side">10</span>
                 </div>
                 <p>Step 1: <span id="two-step-hint1">Subtract 4 from both sides.</span></p>
@@ -62,7 +69,7 @@
             <h1>Stage 3: Multi-Step Equations</h1>
             <div id="multi-step-problem">
                 <p>Equation: <strong><span id="multi-step-eq">2x+3=5x-6</span></strong></p>
-                <div class="balance-scale" id="multi-step-scale">
+                <div class="balance-scale">
                     <span class="left-side">2x+3</span> = <span class="right-side">5x-6</span>
                 </div>
                 <p>Step 1: <span id="multi-step-hint1">Subtract 2x from both sides.</span></p>
@@ -91,7 +98,7 @@
             <h1>Stage 4: Mixed Equations (No Hints)</h1>
             <div id="mixed-problem">
                 <p>Equation: <strong><span id="mixed-eq">x+4=10</span></strong></p>
-                <div class="balance-scale" id="mixed-scale">
+                <div class="balance-scale">
                     <span class="left-side">x+4</span> = <span class="right-side">10</span>
                 </div>
                 <input type="text" id="mixed-input" placeholder="Enter final answer (e.g., x=6)">
