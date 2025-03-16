@@ -10,17 +10,26 @@
     <div class="container">
         <!-- Lesson Section -->
         <div id="lesson" class="section active">
-            <h1>Lesson: Solving x + 5 = 12</h1>
-            <p>Goal: Get <strong>x</strong> alone.</p>
-            <p>Step 1: What’s the opposite of adding 5?</p>
-            <button onclick="showStep('subtract')">Subtract 5</button>
-            <div id="step-result" style="display: none;">
-                <p>Now: <strong>x = 7</strong></p>
-                <button onclick="goToPractice()">Next: Practice</button>
+            <h1>Lesson: Solving 3x + 5 = 20</h1>
+            <p>Goal: Get <strong>x</strong> alone, step by step.</p>
+            <div id="step1">
+                <p>Equation: <strong>3x + 5 = 20</strong></p>
+                <p>Step 1: Subtract 5 from both sides. What do we get?</p>
+                <input type="number" id="step1-input" placeholder="Enter the new right side">
+                <button onclick="checkStep1()">Check</button>
+                <p id="step1-feedback"></p>
             </div>
+            <div id="step2" style="display: none;">
+                <p>Equation: <strong>3x = 15</strong></p>
+                <p>Step 2: Divide both sides by 3. What is x?</p>
+                <input type="number" id="step2-input" placeholder="Enter x">
+                <button onclick="checkStep2()">Check</button>
+                <p id="step2-feedback"></p>
+            </div>
+            <button id="next-practice" style="display: none;" onclick="goToPractice()">Next: Practice</button>
         </div>
 
-        <!-- Practice Section -->
+        <!-- Practice Section (unchanged for now) -->
         <div id="practice" class="section">
             <h1>Practice: Solve x - 3 = 8</h1>
             <p>Enter your answer for <strong>x</strong>:</p>
@@ -30,7 +39,7 @@
             <button onclick="goToChallenge()" style="display: none;" id="next-challenge">Next: Challenge</button>
         </div>
 
-        <!-- Challenge Section -->
+        <!-- Challenge Section (unchanged for now) -->
         <div id="challenge" class="section">
             <h1>Challenge: Solve 4x = 16</h1>
             <p>Enter your answer for <strong>x</strong>:</p>
