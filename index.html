@@ -8,67 +8,77 @@
 </head>
 <body>
     <div class="container">
-        <!-- Lesson Section -->
-        <div id="lesson" class="section active">
-            <h1>Lesson: Solving 3x + 5 = 20</h1>
-            <p>Goal: Get <strong>x</strong> alone, step by step.</p>
-            <div id="step1">
-                <p>Equation: <strong>3x <span id="plus-five">+ 5</span> = 20</strong></p>
-                <p>Step 1: Subtract 5 from both sides. What do we get?</p>
-                <input type="number" id="step1-input" placeholder="Enter the new right side">
-                <button onclick="checkStep1()">Check</button>
-                <p id="step1-feedback"></p>
-            </div>
-            <div id="step2" style="display: none;">
-                <p>Equation: <strong>3x = 15</strong></p>
-                <p>Step 2: Divide both sides by 3. What is x?</p>
-                <input type="number" id="step2-input" placeholder="Enter x">
-                <button onclick="checkStep2()">Check</button>
-                <div id="number-line">
-                    <p>Number line: <span>0 --- 3 --- 6 --- 9 --- 12 --- 15</span></p>
-                    <p id="number-line-result" style="display: none;">x = 5 is here: 0 --- 3 --- <strong>5</strong></p>
+        <!-- Progress Tracker -->
+        <div id="progress-tracker">
+            <h2>Progress</h2>
+            <p>One-Step: <span id="one-step-progress">0/3</span></p>
+            <p>Two-Step: <span id="two-step-progress">Locked</span></p>
+            <p>Multi-Step: <span id="multi-step-progress">Locked</span></p>
+        </div>
+
+        <!-- One-Step Section -->
+        <div id="one-step" class="section active">
+            <h1>One-Step Equations</h1>
+            <div id="one-step-problem">
+                <p>Equation: <strong><span id="one-step-eq">x + 4 = 10</span></strong></p>
+                <div class="balance-scale">
+                    <span class="left-side">x + 4</span> = <span class="right-side">10</span>
                 </div>
-                <p id="step2-feedback"></p>
+                <p>Step: <span id="one-step-hint">Subtract 4 from both sides.</span></p>
+                <input type="number" id="one-step-input" placeholder="Enter x">
+                <button onclick="checkOneStep()">Check</button>
+                <p id="one-step-feedback"></p>
             </div>
-            <button id="next-practice" style="display: none;" onclick="goToPractice()">Next: Practice</button>
         </div>
 
-        <!-- Practice Section -->
-        <div id="practice" class="section">
-            <h1>Practice: Solve x - 3 = 8</h1>
-            <div id="practice-step1">
-                <p>Equation: <strong>x - 3 = 8</strong></p>
-                <p>Step 1: Add 3 to both sides. What do we get?</p>
-                <input type="number" id="practice-step1-input" placeholder="Enter the new right side">
-                <button onclick="checkPracticeStep1()">Check</button>
-                <p id="practice-step1-feedback"></p>
+        <!-- Two-Step Section -->
+        <div id="two-step" class="section">
+            <h1>Two-Step Equations</h1>
+            <div id="two-step-problem">
+                <p>Equation: <strong><span id="two-step-eq">2x + 5 = 11</span></strong></p>
+                <div class="balance-scale">
+                    <span class="left-side">2x + 5</span> = <span class="right-side">11</span>
+                </div>
+                <p>Step 1: <span id="two-step-hint1">Subtract 5 from both sides.</span></p>
+                <input type="number" id="two-step-input1" placeholder="Enter the new right side">
+                <button onclick="checkTwoStep1()">Check</button>
+                <p id="two-step-feedback1"></p>
+                <div id="two-step-step2" style="display: none;">
+                    <p>Equation: <strong><span id="two-step-eq2">2x = 6</span></strong></p>
+                    <p>Step 2: Divide both sides by 2.</p>
+                    <input type="number" id="two-step-input2" placeholder="Enter x">
+                    <button onclick="checkTwoStep2()">Check</button>
+                    <p id="two-step-feedback2"></p>
+                </div>
             </div>
-            <div id="practice-step2" style="display: none;">
-                <p>Equation: <strong>x = 11</strong></p>
-                <p>Step 2: Is this correct? Enter x:</p>
-                <input type="number" id="practice-step2-input" placeholder="Enter x">
-                <button onclick="checkPracticeStep2()">Check</button>
-                <p id="practice-step2-feedback"></p>
-            </div>
-            <button id="next-challenge" style="display: none;" onclick="goToChallenge()">Next: Challenge</button>
         </div>
 
-        <!-- Challenge Section -->
-        <div id="challenge" class="section">
-            <h1>Challenge: Solve 4x = 16</h1>
-            <div id="challenge-step1">
-                <p>Equation: <strong>4x = 16</strong></p>
-                <p>Step 1: Divide both sides by 4. What is x?</p>
-                <input type="number" id="challenge-step1-input" placeholder="Enter x">
-                <button onclick="checkChallengeStep1()">Check</button>
-                <p id="challenge-step1-feedback"></p>
-            </div>
-            <div id="challenge-step2" style="display: none;">
-                <p>Equation: <strong>x = 4</strong></p>
-                <p>Step 2: Is this correct? Enter x:</p>
-                <input type="number" id="challenge-step2-input" placeholder="Enter x">
-                <button onclick="checkChallengeStep2()">Check</button>
-                <p id="challenge-step2-feedback"></p>
+        <!-- Multi-Step Section -->
+        <div id="multi-step" class="section">
+            <h1>Multi-Step Equations</h1>
+            <div id="multi-step-problem">
+                <p>Equation: <strong><span id="multi-step-eq">2x + 3 = 5x - 6</span></strong></p>
+                <div class="balance-scale">
+                    <span class="left-side">2x + 3</span> = <span class="right-side">5x - 6</span>
+                </div>
+                <p>Step 1: Subtract 2x from both sides.</p>
+                <input type="number" id="multi-step-input1" placeholder="Enter the new right side">
+                <button onclick="checkMultiStep1()">Check</button>
+                <p id="multi-step-feedback1"></p>
+                <div id="multi-step-step2" style="display: none;">
+                    <p>Equation: <strong><span id="multi-step-eq2">3 = 3x - 6</span></strong></p>
+                    <p>Step 2: Add 6 to both sides.</p>
+                    <input type="number" id="multi-step-input2" placeholder="Enter the new right side">
+                    <button onclick="checkMultiStep2()">Check</button>
+                    <p id="multi-step-feedback2"></p>
+                    <div id="multi-step-step3" style="display: none;">
+                        <p>Equation: <strong><span id="multi-step-eq3">9 = 3x</span></strong></p>
+                        <p>Step 3: Divide both sides by 3.</p>
+                        <input type="number" id="multi-step-input3" placeholder="Enter x">
+                        <button onclick="checkMultiStep3()">Check</button>
+                        <p id="multi-step-feedback3"></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
