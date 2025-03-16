@@ -56,7 +56,7 @@ function checkOneStep() {
             updateProgress();
         }, 1000);
     } else {
-        feedback.textContent = 'Try again! (e.g., x=6)';
+        feedback.textContent = `Try again! (e.g., ${problem.answer})`;
         feedback.style.color = 'red';
         oneStepCorrect = 0;
         updateProgress();
