@@ -1,6 +1,26 @@
-function showStep(action) {
-    if (action === 'subtract') {
-        document.getElementById('step-result').style.display = 'block';
+function checkStep1() {
+    const input = document.getElementById('step1-input').value;
+    const feedback = document.getElementById('step1-feedback');
+    if (parseInt(input) === 15) {
+        feedback.textContent = 'Correct! 20 - 5 = 15, so 3x = 15.';
+        feedback.style.color = 'green';
+        document.getElementById('step2').style.display = 'block';
+    } else {
+        feedback.textContent = 'Hint: Subtract 5 from 20. Try again!';
+        feedback.style.color = 'red';
+    }
+}
+
+function checkStep2() {
+    const input = document.getElementById('step2-input').value;
+    const feedback = document.getElementById('step2-feedback');
+    if (parseInt(input) === 5) {
+        feedback.textContent = 'Great job! 15 ÷ 3 = 5, so x = 5.';
+        feedback.style.color = 'green';
+        document.getElementById('next-practice').style.display = 'block';
+    } else {
+        feedback.textContent = 'Hint: Divide 15 by 3. Try again!';
+        feedback.style.color = 'red';
     }
 }
 
