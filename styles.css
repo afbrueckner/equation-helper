@@ -63,3 +63,7 @@ input {
     border-radius: 5px;
     margin: 0 10px;
 }
+
+canvas {
+    margin-top: 10px;
+}
