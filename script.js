@@ -74,7 +74,12 @@ function loadTwoStepProblem() {
     document.getElementById('two-step-eq').textContent = problem.eq;
     document.getElementById('two-step-eq2').textContent = problem.eq2;
     document.getElementById('two-step-hint1').textContent = problem.hint1;
-    document.getElementById('two-step-hint2').textContent = problem.hint2; // Set dynamic Step 2 hint
+    const hint2Element = document.getElementById('two-step-hint2');
+    if (hint2Element) {
+        hint2Element.textContent = problem.hint2; // Set dynamic Step 2 hint
+    } else {
+        console.error("Element 'two-step-hint2' not found!");
+    }
     document.querySelector('#two-step .left-side').textContent = problem.eq.split('=')[0].trim();
     document.querySelector('#two-step .right-side').textContent = problem.eq.split('=')[1].trim();
 }
