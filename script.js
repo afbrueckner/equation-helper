@@ -9,11 +9,11 @@ const oneStepProblems = [
     { eq: "2x = 8", answer: 4, hint: "Divide both sides by 2." }
 ];
 const twoStepProblems = [
-    { eq: "2x + 5 = 11", step1: 6, step2: 3, hint1: "Subtract 5 from both sides.", eq2: "2x = 6" },
-    { eq: "3x - 4 = 8", step1: 12, step2: 4, hint1: "Add 4 to both sides.", eq2: "3x = 12" }
+    { eq: "2x + 5 = 11", step1: 6, step2: 3, hint1: "Subtract 5 from both sides.", eq2: "2x = 6", hint2: "Divide both sides by 2." },
+    { eq: "3x - 4 = 8", step1: 12, step2: 4, hint1: "Add 4 to both sides.", eq2: "3x = 12", hint2: "Divide both sides by 3." }
 ];
 const multiStepProblems = [
-    { eq: "2x + 3 = 5x - 6", step1: 3, step2: 9, step3: 3 } // Corrected steps: 3 = 3x - 6, 9 = 3x, x = 3
+    { eq: "2x + 3 = 5x - 6", step1: 3, step2: 9, step3: 3 }
 ];
 
 let currentOneStep = 0;
@@ -74,6 +74,7 @@ function loadTwoStepProblem() {
     document.getElementById('two-step-eq').textContent = problem.eq;
     document.getElementById('two-step-eq2').textContent = problem.eq2;
     document.getElementById('two-step-hint1').textContent = problem.hint1;
+    document.getElementById('two-step-hint2').textContent = problem.hint2; // Set dynamic Step 2 hint
     document.querySelector('#two-step .left-side').textContent = problem.eq.split('=')[0].trim();
     document.querySelector('#two-step .right-side').textContent = problem.eq.split('=')[1].trim();
 }
