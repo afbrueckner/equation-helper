@@ -4,16 +4,16 @@ let multiStepCorrect = 0;
 const masteryThreshold = 3;
 
 const oneStepProblems = [
-    { eq: "x + 4 = 10", answer: "x = 6", hint: "Subtract 4 from both sides." },
-    { eq: "x - 3 = 7", answer: "x = 10", hint: "Add 3 to both sides." },
-    { eq: "2x = 8", answer: "x = 4", hint: "Divide both sides by 2." }
+    { eq: "x + 4 = 10", answer: "x=6", hint: "Subtract 4 from both sides." },
+    { eq: "x - 3 = 7", answer: "x=10", hint: "Add 3 to both sides." },
+    { eq: "2x = 8", answer: "x=4", hint: "Divide both sides by 2." }
 ];
 const twoStepProblems = [
-    { eq: "2x + 4 = 10", step1: "2x = 6", step2: "x = 3", hint1: "Subtract 4 from both sides.", hint2: "Divide both sides by 2." },
-    { eq: "3x - 4 = 8", step1: "3x = 12", step2: "x = 4", hint1: "Add 4 to both sides.", hint2: "Divide both sides by 3." }
+    { eq: "2x + 4 = 10", step1: "2x=6", step2: "x=3", hint1: "Subtract 4 from both sides.", hint2: "Divide both sides by 2." },
+    { eq: "3x - 4 = 8", step1: "3x=12", step2: "x=4", hint1: "Add 4 to both sides.", hint2: "Divide both sides by 3." }
 ];
 const multiStepProblems = [
-    { eq: "2x + 3 = 5x - 6", step1: "3 = 3x - 6", step2: "9 = 3x", step3: "x = 3" }
+    { eq: "2x + 3 = 5x - 6", step1: "3=3x-6", step2: "9=3x", step3: "x=3" }
 ];
 
 let currentOneStep = 0;
@@ -56,7 +56,7 @@ function checkOneStep() {
             updateProgress();
         }, 1000);
     } else {
-        feedback.textContent = 'Try again! (e.g., x = 6)';
+        feedback.textContent = 'Try again! (e.g., x=6)';
         feedback.style.color = 'red';
         oneStepCorrect = 0;
         updateProgress();
