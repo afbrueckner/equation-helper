@@ -3,74 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equation Helper</title>
+    <title>Equation Helper Test</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <!-- Lesson Section -->
-        <div id="lesson" class="section active">
-            <h1>Lesson: Solving 3x + 5 = 20</h1>
-            <p>Goal: Get <strong>x</strong> alone, step by step.</p>
-            <div id="step1">
-                <p>Equation: <strong>3x <span id="plus-five">+ 5</span> = 20</strong></p>
-                <p>Step 1: Subtract 5 from both sides. What do we get?</p>
-                <input type="number" id="step1-input" placeholder="Enter the new right side">
-                <button onclick="checkStep1()">Check</button>
-                <p id="step1-feedback"></p>
-            </div>
-            <div id="step2" style="display: none;">
-                <p>Equation: <strong>3x = 15</strong></p>
-                <p>Step 2: Divide both sides by 3. What is x?</p>
-                <input type="number" id="step2-input" placeholder="Enter x">
-                <button onclick="checkStep2()">Check</button>
-                <div id="number-line">
-                    <p>Number line: <span>0 --- 3 --- 6 --- 9 --- 12 --- 15</span></p>
-                    <p id="number-line-result" style="display: none;">x = 5 is here: 0 --- 3 --- <strong>5</strong></p>
-                </div>
-                <p id="step2-feedback"></p>
-            </div>
-            <button id="next-practice" style="display: none;" onclick="goToPractice()">Next: Practice</button>
-        </div>
-
-        <!-- Practice Section -->
-        <div id="practice" class="section">
-            <h1>Practice: Solve x - 3 = 8</h1>
-            <div id="practice-step1">
-                <p>Equation: <strong>x - 3 = 8</strong></p>
-                <p>Step 1: Add 3 to both sides. What do we get?</p>
-                <input type="number" id="practice-step1-input" placeholder="Enter the new right side">
-                <button onclick="checkPracticeStep1()">Check</button>
-                <p id="practice-step1-feedback"></p>
-            </div>
-            <div id="practice-step2" style="display: none;">
-                <p>Equation: <strong>x = 11</strong></p>
-                <p>Step 2: Is this correct? Enter x:</p>
-                <input type="number" id="practice-step2-input" placeholder="Enter x">
-                <button onclick="checkPracticeStep2()">Check</button>
-                <p id="practice-step2-feedback"></p>
-            </div>
-            <button id="next-challenge" style="display: none;" onclick="goToChallenge()">Next: Challenge</button>
-        </div>
-
-        <!-- Challenge Section -->
-        <div id="challenge" class="section">
-            <h1>Challenge: Solve 4x = 16</h1>
-            <div id="challenge-step1">
-                <p>Equation: <strong>4x = 16</strong></p>
-                <p>Step 1: Divide both sides by 4. What is x?</p>
-                <input type="number" id="challenge-step1-input" placeholder="Enter x">
-                <button onclick="checkChallengeStep1()">Check</button>
-                <p id="challenge-step1-feedback"></p>
-            </div>
-            <div id="challenge-step2" style="display: none;">
-                <p>Equation: <strong>x = 4</strong></p>
-                <p>Step 2: Is this correct? Enter x:</p>
-                <input type="number" id="challenge-step2-input" placeholder="Enter x">
-                <button onclick="checkChallengeStep2()">Check</button>
-                <p id="challenge-step2-feedback"></p>
-            </div>
-        </div>
+        <h1>Test Button</h1>
+        <button onclick="testButton()">Check</button>
+        <p id="test-feedback"></p>
     </div>
     <script src="script.js"></script>
 </body>
