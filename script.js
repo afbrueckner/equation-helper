@@ -13,7 +13,7 @@ const twoStepProblems = [
     { eq: "3x - 4 = 8", step1: 12, step2: 4, hint1: "Add 4 to both sides.", eq2: "3x = 12" }
 ];
 const multiStepProblems = [
-    { eq: "2x + 3 = 5x - 6", step1: -9, step2: 3, step3: 1 }
+    { eq: "2x + 3 = 5x - 6", step1: 3, step2: 9, step3: 3 } // Corrected steps: 3 = 3x - 6, 9 = 3x, x = 3
 ];
 
 let currentOneStep = 0;
@@ -72,7 +72,7 @@ function checkOneStep() {
 function loadTwoStepProblem() {
     const problem = twoStepProblems[currentTwoStep];
     document.getElementById('two-step-eq').textContent = problem.eq;
-    document.getElementById('two-step-eq2').textContent = problem.eq2; // Use the pre-defined intermediate equation
+    document.getElementById('two-step-eq2').textContent = problem.eq2;
     document.getElementById('two-step-hint1').textContent = problem.hint1;
     document.querySelector('#two-step .left-side').textContent = problem.eq.split('=')[0].trim();
     document.querySelector('#two-step .right-side').textContent = problem.eq.split('=')[1].trim();
@@ -139,11 +139,11 @@ function checkMultiStep1() {
     const feedback = document.getElementById('multi-step-feedback1');
     const problem = multiStepProblems[currentMultiStep];
     if (input === problem.step1) {
-        feedback.textContent = 'Correct!';
+        feedback.textContent = 'Correct! Now 3 = 3x - 6';
         feedback.style.color = 'green';
         document.getElementById('multi-step-step2').style.display = 'block';
     } else {
-        feedback.textContent = 'Hint: Subtract 2x correctly.';
+        feedback.textContent = 'Hint: Subtract 2x from both sides to get 3 = 3x - 6.';
         feedback.style.color = 'red';
     }
 }
@@ -153,11 +153,11 @@ function checkMultiStep2() {
     const feedback = document.getElementById('multi-step-feedback2');
     const problem = multiStepProblems[currentMultiStep];
     if (input === problem.step2) {
-        feedback.textContent = 'Correct!';
+        feedback.textContent = 'Correct! Now 9 = 3x';
         feedback.style.color = 'green';
         document.getElementById('multi-step-step3').style.display = 'block';
     } else {
-        feedback.textContent = 'Hint: Add 6 correctly.';
+        feedback.textContent = 'Hint: Add 6 to both sides to get 9 = 3x.';
         feedback.style.color = 'red';
     }
 }
@@ -167,7 +167,7 @@ function checkMultiStep3() {
     const feedback = document.getElementById('multi-step-feedback3');
     const problem = multiStepProblems[currentMultiStep];
     if (input === problem.step3) {
-        feedback.textContent = 'Correct!';
+        feedback.textContent = 'Correct! x = 3';
         feedback.style.color = 'green';
         multiStepCorrect++;
         multiStepSketch.solution = problem.step3;
@@ -185,7 +185,7 @@ function checkMultiStep3() {
             updateProgress();
         }, 1000);
     } else {
-        feedback.textContent = 'Hint: Divide by 3 correctly.';
+        feedback.textContent = 'Hint: Divide both sides by 3 to get x = 3.';
         feedback.style.color = 'red';
         multiStepCorrect = 0;
         updateProgress();
@@ -220,7 +220,7 @@ twoStepSketch = new p5(function(sketch) {
     sketch.solution = 0;
     sketch.showSolution = false;
     sketch.setup = function() {
-        let canvas = sketch.createWidth(400, 50);
+        let canvas = sketch.createCanvas(400, 50);
         canvas.parent('two-step-canvas');
     };
     sketch.draw = function() {
