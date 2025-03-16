@@ -11,21 +11,22 @@
         <!-- Progress Tracker -->
         <div id="progress-tracker">
             <h2>Progress</h2>
-            <p>Level 1 (One-Step): <span id="one-step-progress">0/5</span></p>
-            <p>Level 2 (Two-Step): <span id="two-step-progress">Locked</span></p>
-            <p>Level 3 (Multi-Step): <span id="multi-step-progress">Locked</span></p>
-            <p>Level 4 (Mixed, No Hints): <span id="mixed-progress">Locked</span></p>
+            <p>Level: <span id="current-level">1 (Positive Answers)</span></p>
+            <p>Stage 1 (One-Step): <span id="one-step-progress">0/5</span></p>
+            <p>Stage 2 (Two-Step): <span id="two-step-progress">Locked</span></p>
+            <p>Stage 3 (Multi-Step): <span id="multi-step-progress">Locked</span></p>
+            <p>Stage 4 (Mixed, No Hints): <span id="mixed-progress">Locked</span></p>
             <p>Streak: <span id="streak">0/5</span></p>
             <button onclick="resetGame()">Reset Game</button>
         </div>
 
         <!-- One-Step Section -->
         <div id="one-step" class="section active">
-            <h1>Level 1: One-Step Equations</h1>
+            <h1>Stage 1: One-Step Equations</h1>
             <div id="one-step-problem">
-                <p>Equation: <strong><span id="one-step-eq">x + 4 = 10</span></strong></p>
-                <div class="balance-scale">
-                    <span class="left-side">x + 4</span> = <span class="right-side">10</span>
+                <p>Equation: <strong><span id="one-step-eq">x+4=10</span></strong></p>
+                <div class="balance-scale" id="one-step-scale">
+                    <span class="left-side">x+4</span> = <span class="right-side">10</span>
                 </div>
                 <p>Step: <span id="one-step-hint">Subtract 4 from both sides.</span></p>
                 <input type="text" id="one-step-input" placeholder="Enter new equation (e.g., x=6)">
@@ -36,11 +37,11 @@
 
         <!-- Two-Step Section -->
         <div id="two-step" class="section">
-            <h1>Level 2: Two-Step Equations</h1>
+            <h1>Stage 2: Two-Step Equations</h1>
             <div id="two-step-problem">
-                <p>Equation: <strong><span id="two-step-eq">2x + 4 = 10</span></strong></p>
-                <div class="balance-scale">
-                    <span class="left-side">2x + 4</span> = <span class="right-side">10</span>
+                <p>Equation: <strong><span id="two-step-eq">2x+4=10</span></strong></p>
+                <div class="balance-scale" id="two-step-scale">
+                    <span class="left-side">2x+4</span> = <span class="right-side">10</span>
                 </div>
                 <p>Step 1: <span id="two-step-hint1">Subtract 4 from both sides.</span></p>
                 <input type="text" id="two-step-input1" placeholder="Enter new equation (e.g., 2x=6)">
@@ -58,11 +59,11 @@
 
         <!-- Multi-Step Section -->
         <div id="multi-step" class="section">
-            <h1>Level 3: Multi-Step Equations</h1>
+            <h1>Stage 3: Multi-Step Equations</h1>
             <div id="multi-step-problem">
-                <p>Equation: <strong><span id="multi-step-eq">2x + 3 = 5x - 6</span></strong></p>
-                <div class="balance-scale">
-                    <span class="left-side">2x + 3</span> = <span class="right-side">5x - 6</span>
+                <p>Equation: <strong><span id="multi-step-eq">2x+3=5x-6</span></strong></p>
+                <div class="balance-scale" id="multi-step-scale">
+                    <span class="left-side">2x+3</span> = <span class="right-side">5x-6</span>
                 </div>
                 <p>Step 1: <span id="multi-step-hint1">Subtract 2x from both sides.</span></p>
                 <input type="text" id="multi-step-input1" placeholder="Enter new equation (e.g., 3=3x-6)">
@@ -87,11 +88,11 @@
 
         <!-- Mixed Section (No Hints) -->
         <div id="mixed" class="section">
-            <h1>Level 4: Mixed Equations (No Hints)</h1>
+            <h1>Stage 4: Mixed Equations (No Hints)</h1>
             <div id="mixed-problem">
-                <p>Equation: <strong><span id="mixed-eq">x + 4 = 10</span></strong></p>
-                <div class="balance-scale">
-                    <span class="left-side">x + 4</span> = <span class="right-side">10</span>
+                <p>Equation: <strong><span id="mixed-eq">x+4=10</span></strong></p>
+                <div class="balance-scale" id="mixed-scale">
+                    <span class="left-side">x+4</span> = <span class="right-side">10</span>
                 </div>
                 <input type="text" id="mixed-input" placeholder="Enter final answer (e.g., x=6)">
                 <button onclick="checkMixed()">Check</button>
