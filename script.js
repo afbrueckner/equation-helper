@@ -27,7 +27,7 @@ const levels = [
             { eq: "4x-6=10", step1: "4x=16", step2: "x=4", hint1: "Add 6 to both sides.", hint2: "Divide both sides by 4." },
             { eq: "2x+5=11", step1: "2x=6", step2: "x=3", hint1: "Subtract 5 from both sides.", hint2: "Divide both sides by 2." },
             { eq: "3x-7=5", step1: "3x=12", step2: "x=4", hint1: "Add 7 to both sides.", hint2: "Divide both sides by 3." },
-            { eq: "6x+3=15", step1: "6x=12", step2: "x=2", hint1: "Subtract 3 from both sides.", hint2: "Divide both sides by 6." },
+            { eq: "6x+3=15", step1: "6x=12", step2: "x=2", hint1: "Subtract 3 from both sides.", hint2: "Divide both Sides by 6." },
             { eq: "5x-8=7", step1: "5x=15", step2: "x=3", hint1: "Add 8 to both sides.", hint2: "Divide both sides by 5." },
             { eq: "4x+1=13", step1: "4x=12", step2: "x=3", hint1: "Subtract 1 from both sides.", hint2: "Divide both sides by 4." },
             { eq: "2x-3=7", step1: "2x=10", step2: "x=5", hint1: "Add 3 to both sides.", hint2: "Divide both sides by 2." }
@@ -108,16 +108,16 @@ const levels = [
             { eq: "3/2x-3=3", step1: "3/2x=6", step2: "x=4", hint1: "Add 3 to both sides.", hint2: "Multiply by 2 and divide by 3." }
         ],
         multiStep: [
-            { eq: "2/3x+1=1/2x+2", step1: "2/3x-1/2x=2-1", step2: "1/6x=1", step3: "x=6", hint1: "Subtract 1/2x and 1 from both sides.", hint2: "Simplify: 2/3x-1/2x=1/6x, then multiply by 6." },
-            { eq: "3/5x-2=1/3x+1", step1: "3/5x-1/3x=1+2", step2: "6/15x=3", step3: "x=15", hint1: "Subtract 1/3x and add 2 to both sides.", hint2: "Simplify: 3/5x-1/3x=6/15x, then multiply by 15 and divide by 6." },
-            { eq: "4/3x+2=2/5x+6", step1: "4/3x-2/5x=6-2", step2: "14/15x=4", step3: "x=60", hint1: "Subtract 2/5x and 2 from both sides.", hint2: "Simplify: 4/3x-2/5x=14/15x, then multiply by 15 and divide by 14." },
-            { eq: "2/7x-1=1/4x+1", step1: "2/7x-1/4x=1+1", step2: "1/28x=2", step3: "x=56", hint1: "Subtract 1/4x and add 1 to both sides.", hint2: "Simplify: 2/7x-1/4x=1/28x, then multiply by 28." },
-            { eq: "3/2x+3=5/4x+5", step1: "3/2x-5/4x=5-3", step2: "1/4x=2", step3: "x=8", hint1: "Subtract 5/4x and 3 from both sides.", hint2: "Simplify: 3/2x-5/4x=1/4x, then multiply by 4." },
-            { eq: "1/2x-2=2/3x-5", step1: "1/2x-2/3x=-5+2", step2: "-1/6x=-3", step3: "x=18", hint1: "Subtract 2/3x and add 2 to both sides.", hint2: "Simplify: 1/2x-2/3x=-1/6x, then multiply by -6." },
-            { eq: "5/3x+1=3/4x+5", step1: "5/3x-3/4x=5-1", step2: "11/12x=4", step3: "x=48", hint1: "Subtract 3/4x and 1 from both sides.", hint2: "Simplify: 5/3x-3/4x=11/12x, then multiply by 12 and divide by 11." },
-            { eq: "2/5x-3=1/6x+1", step1: "2/5x-1/6x=1+3", step2: "7/30x=4", step3: "x=120", hint1: "Subtract 1/6x and add 3 to both sides.", hint2: "Simplify: 2/5x-1/6x=7/30x, then multiply by 30 and divide by 7." },
-            { eq: "3/4x+2=2/3x+3", step1: "3/4x-2/3x=3-2", step2: "1/12x=1", step3: "x=12", hint1: "Subtract 2/3x and 2 from both sides.", hint2: "Simplify: 3/4x-2/3x=1/12x, then multiply by 12." },
-            { eq: "1/3x-1=4/5x-5", step1: "1/3x-4/5x=-5+1", step2: "-7/15x=-4", step3: "x=60", hint1: "Subtract 4/5x and add 1 to both sides.", hint2: "Simplify: 1/3x-4/5x=-7/15x, then multiply by -15 and divide by 7." }
+            { eq: "2/3x+1=1/3x+2", step1: "2/3x-1/3x=2-1", step2: "1/3x=1", step3: "x=3", hint1: "Subtract 1/3x and 1 from both sides.", hint2: "Simplify: 2/3x-1/3x=1/3x, then multiply by 3." },
+            { eq: "3/5x-1=2/5x+2", step1: "3/5x-2/5x=2+1", step2: "1/5x=3", step3: "x=15", hint1: "Subtract 2/5x and add 1 to both sides.", hint2: "Simplify: 3/5x-2/5x=1/5x, then multiply by 5." },
+            { eq: "4/3x+2=1/3x+6", step1: "4/3x-1/3x=6-2", step2: "3/3x=4", step3: "x=4", hint1: "Subtract 1/3x and 2 from both sides.", hint2: "Simplify: 4/3x-1/3x=3/3x, then multiply by 3 and divide by 3." },
+            { eq: "2/7x-1=1/7x+1", step1: "2/7x-1/7x=1+1", step2: "1/7x=2", step3: "x=14", hint1: "Subtract 1/7x and add 1 to both sides.", hint2: "Simplify: 2/7x-1/7x=1/7x, then multiply by 7." },
+            { eq: "3/2x+2=1/2x+4", step1: "3/2x-1/2x=4-2", step2: "2/2x=2", step3: "x=2", hint1: "Subtract 1/2x and 2 from both sides.", hint2: "Simplify: 3/2x-1/2x=2/2x, then multiply by 2 and divide by 2." },
+            { eq: "2/5x-2=1/5x-1", step1: "2/5x-1/5x=-1+2", step2: "1/5x=1", step3: "x=5", hint1: "Subtract 1/5x and add 2 to both sides.", hint2: "Simplify: 2/5x-1/5x=1/5x, then multiply by 5." },
+            { eq: "5/4x+1=3/4x+2", step1: "5/4x-3/4x=2-1", step2: "2/4x=1", step3: "x=2", hint1: "Subtract 3/4x and 1 from both sides.", hint2: "Simplify: 5/4x-3/4x=2/4x, then multiply by 4 and divide by 2." },
+            { eq: "3/7x-1=2/7x+1", step1: "3/7x-2/7x=1+1", step2: "1/7x=2", step3: "x=14", hint1: "Subtract 2/7x and add 1 to both sides.", hint2: "Simplify: 3/7x-2/7x=1/7x, then multiply by 7." },
+            { eq: "4/5x+2=3/5x+4", step1: "4/5x-3/5x=4-2", step2: "1/5x=2", step3: "x=10", hint1: "Subtract 3/5x and 2 from both sides.", hint2: "Simplify: 4/5x-3/5x=1/5x, then multiply by 5." },
+            { eq: "5/3x-2=2/3x+4", step1: "5/3x-2/3x=4+2", step2: "3/3x=6", step3: "x=6", hint1: "Subtract 2/3x and add 2 to both sides.", hint2: "Simplify: 5/3x-2/3x=3/3x, then multiply by 3 and divide by 3." }
         ]
     }},
     { name: "4 (Mixed)", problems: {} }
