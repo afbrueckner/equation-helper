@@ -5,7 +5,7 @@ let multiStepCorrect = 0;
 let mixedCorrect = 0;
 let streak = 0;
 const streakThreshold = 5;
-let activeStage = 'one-step'; // Track active stage
+let activeStage = 'one-step';
 
 const levels = [
     { name: "1 (Positive Answers)", problems: {
@@ -145,7 +145,6 @@ const mixedProblems = [
 
 let currentOneStep, currentTwoStep, currentMultiStep, currentMixed;
 
-// Progress Tracker
 function updateProgress() {
     document.getElementById('level-select').value = currentLevel;
     document.getElementById('one-step-progress').textContent = `${oneStepCorrect}/${streakThreshold}`;
@@ -191,7 +190,6 @@ function changeLevel() {
     updateProgress();
 }
 
-// Save/Load Session
 function saveSession() {
     const session = {
         currentLevel,
@@ -228,7 +226,6 @@ function loadSession() {
     }
 }
 
-// One-Step Logic
 function loadOneStepProblem() {
     currentOneStep = levels[currentLevel - 1].problems.oneStep[Math.floor(Math.random() * 10)];
     document.getElementById('one-step-eq').textContent = currentOneStep.eq;
@@ -267,7 +264,6 @@ function checkOneStep() {
     }
 }
 
-// Two-Step Logic
 function loadTwoStepProblem() {
     currentTwoStep = levels[currentLevel - 1].problems.twoStep[Math.floor(Math.random() * 10)];
     document.getElementById('two-step-eq').textContent = currentTwoStep.eq;
@@ -326,7 +322,6 @@ function checkTwoStep2() {
     }
 }
 
-// Multi-Step Logic
 function loadMultiStepProblem() {
     currentMultiStep = levels[currentLevel - 1].problems.multiStep[Math.floor(Math.random() * (currentLevel === 3 ? 20 : 10))];
     document.getElementById('multi-step-eq').textContent = currentMultiStep.eq;
@@ -399,7 +394,6 @@ function checkMultiStep3() {
     }
 }
 
-// Mixed Logic (No Hints)
 function loadMixedProblem() {
     currentMixed = mixedProblems[Math.floor(Math.random() * mixedProblems.length)];
     document.getElementById('mixed-eq').textContent = currentMixed.eq;
@@ -444,7 +438,6 @@ function checkMixed() {
     }
 }
 
-// Initialize
 function initialize() {
     const savedSession = localStorage.getItem('equationHelperSession');
     if (savedSession) {
@@ -458,7 +451,8 @@ function initialize() {
     }
 }
 
-document.getElementById('save-session').addEventListener('click', saveSession);
-document.getElementById('load-session').addEventListener('click', loadSession);
-
-initialize();
+document.addEventListener('DOMContentLoaded', () => {
+    initialize();
+    document.getElementById('save-session').addEventListener('click', saveSession);
+    document.getElementById('load-session').addEventListener('click', loadSession);
+});
