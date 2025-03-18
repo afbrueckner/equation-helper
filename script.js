@@ -5,6 +5,7 @@ let multiStepCorrect = 0;
 let mixedCorrect = 0;
 let streak = 0;
 const streakThreshold = 5;
+let activeStage = 'one-step'; // Track active stage
 
 const levels = [
     { name: "1 (Positive Answers)", problems: {
@@ -27,7 +28,7 @@ const levels = [
             { eq: "4x-6=10", step1: "4x=16", step2: "x=4", hint1: "Add 6 to both sides.", hint2: "Divide both sides by 4." },
             { eq: "2x+5=11", step1: "2x=6", step2: "x=3", hint1: "Subtract 5 from both sides.", hint2: "Divide both sides by 2." },
             { eq: "3x-7=5", step1: "3x=12", step2: "x=4", hint1: "Add 7 to both sides.", hint2: "Divide both sides by 3." },
-            { eq: "6x+3=15", step1: "6x=12", step2: "x=2", hint1: "Subtract 3 from both sides.", hint2: "Divide both Sides by 6." },
+            { eq: "6x+3=15", step1: "6x=12", step2: "x=2", hint1: "Subtract 3 from both sides.", hint2: "Divide both sides by 6." },
             { eq: "5x-8=7", step1: "5x=15", step2: "x=3", hint1: "Add 8 to both sides.", hint2: "Divide both sides by 5." },
             { eq: "4x+1=13", step1: "4x=12", step2: "x=3", hint1: "Subtract 1 from both sides.", hint2: "Divide both sides by 4." },
             { eq: "2x-3=7", step1: "2x=10", step2: "x=5", hint1: "Add 3 to both sides.", hint2: "Divide both sides by 2." }
@@ -117,7 +118,17 @@ const levels = [
             { eq: "5/4x+1=3/4x+2", step1: "5/4x-3/4x=2-1", step2: "2/4x=1", step3: "x=2", hint1: "Subtract 3/4x and 1 from both sides.", hint2: "Simplify: 5/4x-3/4x=2/4x, then multiply by 4 and divide by 2." },
             { eq: "3/7x-1=2/7x+1", step1: "3/7x-2/7x=1+1", step2: "1/7x=2", step3: "x=14", hint1: "Subtract 2/7x and add 1 to both sides.", hint2: "Simplify: 3/7x-2/7x=1/7x, then multiply by 7." },
             { eq: "4/5x+2=3/5x+4", step1: "4/5x-3/5x=4-2", step2: "1/5x=2", step3: "x=10", hint1: "Subtract 3/5x and 2 from both sides.", hint2: "Simplify: 4/5x-3/5x=1/5x, then multiply by 5." },
-            { eq: "5/3x-2=2/3x+4", step1: "5/3x-2/3x=4+2", step2: "3/3x=6", step3: "x=6", hint1: "Subtract 2/3x and add 2 to both sides.", hint2: "Simplify: 5/3x-2/3x=3/3x, then multiply by 3 and divide by 3." }
+            { eq: "5/3x-2=2/3x+4", step1: "5/3x-2/3x=4+2", step2: "3/3x=6", step3: "x=6", hint1: "Subtract 2/3x and add 2 to both sides.", hint2: "Simplify: 5/3x-2/3x=3/3x, then multiply by 3 and divide by 3." },
+            { eq: "3/4x+3=2/4x+5", step1: "3/4x-2/4x=5-3", step2: "1/4x=2", step3: "x=8", hint1: "Subtract 2/4x and 3 from both sides.", hint2: "Simplify: 3/4x-2/4x=1/4x, then multiply by 4." },
+            { eq: "4/7x-2=3/7x+1", step1: "4/7x-3/7x=1+2", step2: "1/7x=3", step3: "x=21", hint1: "Subtract 3/7x and add 2 to both sides.", hint2: "Simplify: 4/7x-3/7x=1/7x, then multiply by 7." },
+            { eq: "2/2x+1=1/2x+2", step1: "2/2x-1/2x=2-1", step2: "1/2x=1", step3: "x=2", hint1: "Subtract 1/2x and 1 from both sides.", hint2: "Simplify: 2/2x-1/2x=1/2x, then multiply by 2." },
+            { eq: "5/5x-1=3/5x+2", step1: "5/5x-3/5x=2+1", step2: "2/5x=3", step3: "x=15", hint1: "Subtract 3/5x and add 1 to both sides.", hint2: "Simplify: 5/5x-3/5x=2/5x, then multiply by 5 and divide by 2." },
+            { eq: "3/3x+2=1/3x+4", step1: "3/3x-1/3x=4-2", step2: "2/3x=2", step3: "x=3", hint1: "Subtract 1/3x and 2 from both sides.", hint2: "Simplify: 3/3x-1/3x=2/3x, then multiply by 3 and divide by 2." },
+            { eq: "4/4x-3=2/4x-1", step1: "4/4x-2/4x=-1+3", step2: "2/4x=2", step3: "x=4", hint1: "Subtract 2/4x and add 3 to both sides.", hint2: "Simplify: 4/4x-2/4x=2/4x, then multiply by 4 and divide by 2." },
+            { eq: "5/7x+1=4/7x+3", step1: "5/7x-4/7x=3-1", step2: "1/7x=2", step3: "x=14", hint1: "Subtract 4/7x and 1 from both sides.", hint2: "Simplify: 5/7x-4/7x=1/7x, then multiply by 7." },
+            { eq: "2/3x+3=1/3x+5", step1: "2/3x-1/3x=5-3", step2: "1/3x=2", step3: "x=6", hint1: "Subtract 1/3x and 3 from both sides.", hint2: "Simplify: 2/3x-1/3x=1/3x, then multiply by 3." },
+            { eq: "3/5x+2=1/5x+4", step1: "3/5x-1/5x=4-2", step2: "2/5x=2", step3: "x=5", hint1: "Subtract 1/5x and 2 from both sides.", hint2: "Simplify: 3/5x-1/5x=2/5x, then multiply by 5 and divide by 2." },
+            { eq: "4/2x-1=3/2x+2", step1: "4/2x-3/2x=2+1", step2: "1/2x=3", step3: "x=6", hint1: "Subtract 3/2x and add 1 to both sides.", hint2: "Simplify: 4/2x-3/2x=1/2x, then multiply by 2." }
         ]
     }},
     { name: "4 (Mixed)", problems: {} }
@@ -142,6 +153,15 @@ function updateProgress() {
     document.getElementById('multi-step-progress').textContent = twoStepCorrect >= streakThreshold ? `${multiStepCorrect}/${streakThreshold}` : 'Locked';
     document.getElementById('mixed-progress').textContent = multiStepCorrect >= streakThreshold ? `${mixedCorrect}/${streakThreshold}` : 'Locked';
     document.getElementById('streak').textContent = `${streak}/${streakThreshold}`;
+    setActiveStage();
+}
+
+function setActiveStage() {
+    document.getElementById('one-step').classList.remove('active');
+    document.getElementById('two-step').classList.remove('active');
+    document.getElementById('multi-step').classList.remove('active');
+    document.getElementById('mixed').classList.remove('active');
+    document.getElementById(activeStage).classList.add('active');
 }
 
 function resetGame() {
@@ -151,10 +171,7 @@ function resetGame() {
     multiStepCorrect = 0;
     mixedCorrect = 0;
     streak = 0;
-    document.getElementById('one-step').classList.add('active');
-    document.getElementById('two-step').classList.remove('active');
-    document.getElementById('multi-step').classList.remove('active');
-    document.getElementById('mixed').classList.remove('active');
+    activeStage = 'one-step';
     loadOneStepProblem();
     updateProgress();
 }
@@ -166,15 +183,49 @@ function changeLevel() {
     multiStepCorrect = 0;
     mixedCorrect = 0;
     streak = 0;
-    document.getElementById('one-step').classList.add('active');
-    document.getElementById('two-step').classList.remove('active');
-    document.getElementById('multi-step').classList.remove('active');
-    document.getElementById('mixed').classList.remove('active');
+    activeStage = 'one-step';
     loadOneStepProblem();
     loadTwoStepProblem();
     loadMultiStepProblem();
     loadMixedProblem();
     updateProgress();
+}
+
+// Save/Load Session
+function saveSession() {
+    const session = {
+        currentLevel,
+        oneStepCorrect,
+        twoStepCorrect,
+        multiStepCorrect,
+        mixedCorrect,
+        streak,
+        activeStage
+    };
+    localStorage.setItem('equationHelperSession', JSON.stringify(session));
+    alert('Session saved!');
+}
+
+function loadSession() {
+    const savedSession = localStorage.getItem('equationHelperSession');
+    if (savedSession) {
+        const session = JSON.parse(savedSession);
+        currentLevel = session.currentLevel;
+        oneStepCorrect = session.oneStepCorrect;
+        twoStepCorrect = session.twoStepCorrect;
+        multiStepCorrect = session.multiStepCorrect;
+        mixedCorrect = session.mixedCorrect;
+        streak = session.streak;
+        activeStage = session.activeStage;
+        loadOneStepProblem();
+        loadTwoStepProblem();
+        loadMultiStepProblem();
+        loadMixedProblem();
+        updateProgress();
+        alert('Session loaded!');
+    } else {
+        alert('No saved session found.');
+    }
 }
 
 // One-Step Logic
@@ -196,8 +247,7 @@ function checkOneStep() {
         streak++;
         oneStepCorrect++;
         if (streak >= streakThreshold) {
-            document.getElementById('one-step').classList.remove('active');
-            document.getElementById('two-step').classList.add('active');
+            activeStage = 'two-step';
             streak = 0;
         }
         setTimeout(() => {
@@ -255,8 +305,7 @@ function checkTwoStep2() {
         streak++;
         twoStepCorrect++;
         if (streak >= streakThreshold) {
-            document.getElementById('two-step').classList.remove('active');
-            document.getElementById('multi-step').classList.add('active');
+            activeStage = 'multi-step';
             streak = 0;
         }
         setTimeout(() => {
@@ -279,7 +328,7 @@ function checkTwoStep2() {
 
 // Multi-Step Logic
 function loadMultiStepProblem() {
-    currentMultiStep = levels[currentLevel - 1].problems.multiStep[Math.floor(Math.random() * 10)];
+    currentMultiStep = levels[currentLevel - 1].problems.multiStep[Math.floor(Math.random() * (currentLevel === 3 ? 20 : 10))];
     document.getElementById('multi-step-eq').textContent = currentMultiStep.eq;
     document.getElementById('multi-step-eq2').textContent = currentMultiStep.step1;
     document.getElementById('multi-step-eq3').textContent = currentMultiStep.step2;
@@ -329,8 +378,7 @@ function checkMultiStep3() {
         streak++;
         multiStepCorrect++;
         if (streak >= streakThreshold) {
-            document.getElementById('multi-step').classList.remove('active');
-            document.getElementById('mixed').classList.add('active');
+            activeStage = 'mixed';
             streak = 0;
         }
         setTimeout(() => {
@@ -375,8 +423,7 @@ function checkMixed() {
             multiStepCorrect = 0;
             mixedCorrect = 0;
             streak = 0;
-            document.getElementById('mixed').classList.remove('active');
-            document.getElementById('one-step').classList.add('active');
+            activeStage = 'one-step';
         } else if (streak >= streakThreshold && currentLevel === 4) {
             feedback.textContent = 'You’ve mastered all levels! Reset to play again.';
             streak = 0;
@@ -398,8 +445,20 @@ function checkMixed() {
 }
 
 // Initialize
-loadOneStepProblem();
-loadTwoStepProblem();
-loadMultiStepProblem();
-loadMixedProblem();
-updateProgress();
+function initialize() {
+    const savedSession = localStorage.getItem('equationHelperSession');
+    if (savedSession) {
+        loadSession();
+    } else {
+        loadOneStepProblem();
+        loadTwoStepProblem();
+        loadMultiStepProblem();
+        loadMixedProblem();
+        updateProgress();
+    }
+}
+
+document.getElementById('save-session').addEventListener('click', saveSession);
+document.getElementById('load-session').addEventListener('click', loadSession);
+
+initialize();
