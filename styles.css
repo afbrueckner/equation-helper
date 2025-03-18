@@ -26,6 +26,9 @@ header select {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    max-width: 600px; /* Constrain progress box width */
+    margin-left: auto; /* Center it */
+    margin-right: auto;
 }
 
 #progress h2 {
@@ -43,16 +46,20 @@ header select {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    display: none; /* Ensure non-active stages are hidden */
+    display: none;
+    max-width: 600px; /* Set a reasonable max width */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto;
 }
 
 .stage.active {
-    display: block; /* Only active stage shows */
+    display: block;
 }
 
 .stage h2 {
     margin-top: 0;
     color: #333;
+    text-align: center; /* Center the stage title */
 }
 
 .stage p {
@@ -62,16 +69,30 @@ header select {
 .equation {
     font-size: 20px;
     margin: 10px 0;
+    text-align: center; /* Center the equation */
 }
 
 input[type="text"] {
     padding: 5px;
     font-size: 16px;
     width: 200px;
+    display: block; /* Ensure input stacks nicely */
+    margin: 10px auto; /* Center the input */
 }
 
 button {
     padding: 5px 10px;
     margin: 0 5px;
     cursor: pointer;
+    display: inline-block; /* Keep buttons inline */
+}
+
+.stage button {
+    margin: 10px auto; /* Center buttons within stage */
+    display: block; /* Stack buttons if needed */
+}
+
+/* Feedback text alignment */
+.stage p[id$="-feedback"] {
+    text-align: center;
 }
