@@ -73,7 +73,7 @@ const levels = [
         ],
         multiStep: [
             { eq: "3x+2=x-6", step1: "2x+2=-6", step2: "2x=-8", step3: "x=-4", hint1: "Subtract x from both sides.", hint2: "Subtract 2 from both sides.", hint3: "Divide both sides by 2." },
-            { eq: "4x-3=7x+9", step1: "-3=3x+9", step2: "-12=3x", step3: "x=-4", hint1: "Subtract 4x from both sides.", hint2: "Subtract 9 from both sides.", hint3: "Divide both sides by 3." },
+            { eq: "4x-3=7x+9", step1: "3x+9=-3", step2: "3x=-12", step3: "x=-4", hint1: "Subtract 4x from both sides.", hint2: "Subtract 9 from both sides.", hint3: "Divide both sides by 3." },
             { eq: "5x+1=2x-8", step1: "3x+1=-8", step2: "3x=-9", step3: "x=-3", hint1: "Subtract 2x from both sides.", hint2: "Subtract 1 from both sides.", hint3: "Divide both sides by 3." },
             { eq: "6x-4=3x-10", step1: "3x-4=-10", step2: "3x=-6", step3: "x=-2", hint1: "Subtract 3x from both sides.", hint2: "Add 4 to both sides.", hint3: "Divide both sides by 3." },
             { eq: "7x-2=4x-11", step1: "3x-2=-11", step2: "3x=-9", step3: "x=-3", hint1: "Subtract 4x from both sides.", hint2: "Add 2 to both sides.", hint3: "Divide both sides by 3." },
@@ -223,6 +223,25 @@ function loadSession() {
         alert('Session loaded!');
     } else {
         alert('No saved session found.');
+    }
+}
+
+function loadSessionSilently() {
+    const savedSession = localStorage.getItem('equationHelperSession');
+    if (savedSession) {
+        const session = JSON.parse(savedSession);
+        currentLevel = session.currentLevel;
+        oneStepCorrect = session.oneStepCorrect;
+        twoStepCorrect = session.twoStepCorrect;
+        multiStepCorrect = session.multiStepCorrect;
+        mixedCorrect = session.mixedCorrect;
+        streak = session.streak;
+        activeStage = session.activeStage;
+        loadOneStepProblem();
+        loadTwoStepProblem();
+        loadMultiStepProblem();
+        loadMixedProblem();
+        updateProgress();
     }
 }
 
@@ -441,7 +460,7 @@ function checkMixed() {
 function initialize() {
     const savedSession = localStorage.getItem('equationHelperSession');
     if (savedSession) {
-        loadSession();
+        loadSessionSilently(); // Load without alert on page load
     } else {
         loadOneStepProblem();
         loadTwoStepProblem();
