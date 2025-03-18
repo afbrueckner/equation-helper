@@ -7,106 +7,97 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Progress Tracker -->
-        <div id="progress-tracker">
-            <h2>Progress</h2>
-            <p>Level: 
-                <select id="level-select" onchange="changeLevel()">
-                    <option value="1">1 (Positive Answers)</option>
-                    <option value="2">2 (Negative Answers)</option>
-                    <option value="3">3 (Fractions with Positive Answers)</option>
-                    <option value="4">4 (Mixed)</option>
-                </select>
-            </p>
-            <p>Stage 1 (One-Step): <span id="one-step-progress">0/5</span></p>
-            <p>Stage 2 (Two-Step): <span id="two-step-progress">Locked</span></p>
-            <p>Stage 3 (Multi-Step): <span id="multi-step-progress">Locked</span></p>
-            <p>Stage 4 (Mixed, No Hints): <span id="mixed-progress">Locked</span></p>
-            <p>Streak: <span id="streak">0/5</span></p>
-            <button onclick="resetGame()">Reset Game</button>
-        </div>
+    <header>
+        <h1>Equation Helper</h1>
+        <label for="level-select">Level:</label>
+        <select id="level-select" onchange="changeLevel()">
+            <option value="1">1 (Positive Answers)</option>
+            <option value="2">2 (Negative Answers)</option>
+            <option value="3">3 (Fractions with Positive Answers)</option>
+            <option value="4">4 (Mixed)</option>
+        </select>
+        <button id="save-session">Save Session</button>
+        <button id="load-session">Load Session</button>
+        <button onclick="resetGame()">Reset</button>
+    </header>
 
-        <!-- One-Step Section -->
-        <div id="one-step" class="section active">
-            <h1>Stage 1: One-Step Equations</h1>
-            <div id="one-step-problem">
-                <p>Equation: <strong><span id="one-step-eq">x+4=10</span></strong></p>
-                <div class="balance-scale">
-                    <span class="left-side">x+4</span> = <span class="right-side">10</span>
-                </div>
-                <p>Step: <span id="one-step-hint">Subtract 4 from both sides.</span></p>
-                <input type="text" id="one-step-input" placeholder="Enter new equation (e.g., x=6)">
-                <button onclick="checkOneStep()">Check</button>
-                <p id="one-step-feedback"></p>
-            </div>
-        </div>
+    <section id="progress">
+        <h2>Progress</h2>
+        <p>One-Step: <span id="one-step-progress">0/5</span></p>
+        <p>Two-Step: <span id="two-step-progress">Locked</span></p>
+        <p>Multi-Step: <span id="multi-step-progress">Locked</span></p>
+        <p>Mixed: <span id="mixed-progress">Locked</span></p>
+        <p>Streak: <span id="streak">0/5</span></p>
+    </section>
 
-        <!-- Two-Step Section -->
-        <div id="two-step" class="section">
-            <h1>Stage 2: Two-Step Equations</h1>
-            <div id="two-step-problem">
-                <p>Equation: <strong><span id="two-step-eq">2x+4=10</span></strong></p>
-                <div class="balance-scale">
-                    <span class="left-side">2x+4</span> = <span class="right-side">10</span>
-                </div>
-                <p>Step 1: <span id="two-step-hint1">Subtract 4 from both sides.</span></p>
-                <input type="text" id="two-step-input1" placeholder="Enter new equation (e.g., 2x=6)">
-                <button onclick="checkTwoStep1()">Check</button>
-                <p id="two-step-feedback1"></p>
-                <div id="two-step-step2" style="display: none;">
-                    <p>Equation: <strong><span id="two-step-eq2"></span></strong></p>
-                    <p>Step 2: <span id="two-step-hint2"></span></p>
-                    <input type="text" id="two-step-input2" placeholder="Enter new equation (e.g., x=3)">
-                    <button onclick="checkTwoStep2()">Check</button>
-                    <p id="two-step-feedback2"></p>
-                </div>
-            </div>
+    <section id="one-step" class="stage active">
+        <h2>One-Step</h2>
+        <p>Solve: <span id="one-step-eq"></span></p>
+        <p>Hint: <span id="one-step-hint"></span></p>
+        <div class="equation">
+            <span class="left-side"></span> = <span class="right-side"></span>
         </div>
+        <input type="text" id="one-step-input" placeholder="Enter your answer (e.g., x=5 or 5=x)">
+        <button onclick="checkOneStep()">Check</button>
+        <p id="one-step-feedback"></p>
+    </section>
 
-        <!-- Multi-Step Section -->
-        <div id="multi-step" class="section">
-            <h1>Stage 3: Multi-Step Equations</h1>
-            <div id="multi-step-problem">
-                <p>Equation: <strong><span id="multi-step-eq">2x+3=5x-6</span></strong></p>
-                <div class="balance-scale">
-                    <span class="left-side">2x+3</span> = <span class="right-side">5x-6</span>
-                </div>
-                <p>Step 1: <span id="multi-step-hint1">Subtract 2x from both sides.</span></p>
-                <input type="text" id="multi-step-input1" placeholder="Enter new equation (e.g., 3=3x-6)">
-                <button onclick="checkMultiStep1()">Check</button>
-                <p id="multi-step-feedback1"></p>
-                <div id="multi-step-step2" style="display: none;">
-                    <p>Equation: <strong><span id="multi-step-eq2"></span></strong></p>
-                    <p>Step 2: <span id="multi-step-hint2">Add 6 to both sides.</span></p>
-                    <input type="text" id="multi-step-input2" placeholder="Enter new equation (e.g., 9=3x)">
-                    <button onclick="checkMultiStep2()">Check</button>
-                    <p id="multi-step-feedback2"></p>
-                    <div id="multi-step-step3" style="display: none;">
-                        <p>Equation: <strong><span id="multi-step-eq3"></span></strong></p>
-                        <p>Step 3: <span id="multi-step-hint3">Divide both sides by 3.</span></p>
-                        <input type="text" id="multi-step-input3" placeholder="Enter new equation (e.g., x=3)">
-                        <button onclick="checkMultiStep3()">Check</button>
-                        <p id="multi-step-feedback3"></p>
-                    </div>
-                </div>
-            </div>
+    <section id="two-step" class="stage">
+        <h2>Two-Step</h2>
+        <p>Solve: <span id="two-step-eq"></span></p>
+        <p>Hint 1: <span id="two-step-hint1"></span></p>
+        <div class="equation">
+            <span class="left-side"></span> = <span class="right-side"></span>
         </div>
+        <input type="text" id="two-step-input1" placeholder="Enter step 1 (e.g., 2x=6)">
+        <button onclick="checkTwoStep1()">Check Step 1</button>
+        <p id="two-step-feedback1"></p>
+        <div id="two-step-step2" style="display: none;">
+            <p>Next: <span id="two-step-eq2"></span></p>
+            <p>Hint 2: <span id="two-step-hint2"></span></p>
+            <input type="text" id="two-step-input2" placeholder="Enter final answer (e.g., x=3)">
+            <button onclick="checkTwoStep2()">Check Step 2</button>
+            <p id="two-step-feedback2"></p>
+        </div>
+    </section>
 
-        <!-- Mixed Section (No Hints) -->
-        <div id="mixed" class="section">
-            <h1>Stage 4: Mixed Equations (No Hints)</h1>
-            <div id="mixed-problem">
-                <p>Equation: <strong><span id="mixed-eq">x+4=10</span></strong></p>
-                <div class="balance-scale">
-                    <span class="left-side">x+4</span> = <span class="right-side">10</span>
-                </div>
-                <input type="text" id="mixed-input" placeholder="Enter final answer (e.g., x=6)">
-                <button onclick="checkMixed()">Check</button>
-                <p id="mixed-feedback"></p>
-            </div>
+    <section id="multi-step" class="stage">
+        <h2>Multi-Step</h2>
+        <p>Solve: <span id="multi-step-eq"></span></p>
+        <p>Hint 1: <span id="multi-step-hint1"></span></p>
+        <div class="equation">
+            <span class="left-side"></span> = <span class="right-side"></span>
         </div>
-    </div>
+        <input type="text" id="multi-step-input1" placeholder="Enter step 1 (e.g., 3x+2=5)">
+        <button onclick="checkMultiStep1()">Check Step 1</button>
+        <p id="multi-step-feedback1"></p>
+        <div id="multi-step-step2" style="display: none;">
+            <p>Next: <span id="multi-step-eq2"></span></p>
+            <p>Hint 2: <span id="multi-step-hint2"></span></p>
+            <input type="text" id="multi-step-input2" placeholder="Enter step 2 (e.g., 3x=3)">
+            <button onclick="checkMultiStep2()">Check Step 2</button>
+            <p id="multi-step-feedback2"></p>
+        </div>
+        <div id="multi-step-step3" style="display: none;">
+            <p>Next: <span id="multi-step-eq3"></span></p>
+            <p>Hint 3: <span id="multi-step-hint3"></span></p>
+            <input type="text" id="multi-step-input3" placeholder="Enter final answer (e.g., x=1)">
+            <button onclick="checkMultiStep3()">Check Step 3</button>
+            <p id="multi-step-feedback3"></p>
+        </div>
+    </section>
+
+    <section id="mixed" class="stage">
+        <h2>Mixed (No Hints)</h2>
+        <p>Solve: <span id="mixed-eq"></span></p>
+        <div class="equation">
+            <span class="left-side"></span> = <span class="right-side"></span>
+        </div>
+        <input type="text" id="mixed-input" placeholder="Enter your answer (e.g., x=5)">
+        <button onclick="checkMixed()">Check</button>
+        <p id="mixed-feedback"></p>
+    </section>
+
     <script src="script.js"></script>
 </body>
 </html>
