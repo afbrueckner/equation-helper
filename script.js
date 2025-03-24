@@ -177,12 +177,7 @@ function resetGame() {
 
 function changeLevel() {
     currentLevel = parseInt(document.getElementById('level-select').value);
-    oneStepCorrect = 0;
-    twoStepCorrect = 0;
-    multiStepCorrect = 0;
-    mixedCorrect = 0;
-    streak = 0;
-    activeStage = 'one-step';
+    activeStage = 'one-step'; // Reset to one-step for new level, but keep progress
     loadOneStepProblem();
     loadTwoStepProblem();
     loadMultiStepProblem();
@@ -254,9 +249,9 @@ function loadOneStepProblem() {
 }
 
 function checkOneStep() {
-    const input = document.getElementById('one-step-input').value.trim();
+    const input = document.getElementById('one-step-input').value.trim().toLowerCase();
     const feedback = document.getElementById('one-step-feedback');
-    const validAnswers = [currentOneStep.answer, currentOneStep.answer.split('=')[1] + '=x'];
+    const validAnswers = [currentOneStep.answer.toLowerCase(), currentOneStep.answer.split('=')[1] + '=x'];
     if (validAnswers.includes(input)) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
@@ -274,8 +269,6 @@ function checkOneStep() {
         }, 1000);
     } else {
         const [left, right] = currentOneStep.eq.split('=');
-        const op = currentOneStep.hint.includes('Subtract') ? '-' : currentOneStep.hint.includes('Add') ? '+' : currentOneStep.hint.includes('Multiply') ? '*' : '/';
-        const num = currentOneStep.hint.match(/\d+\/\d+|\d+/) ? currentOneStep.hint.match(/\d+\/\d+|\d+/)[0] : '';
         feedback.textContent = `Incorrect. You entered '${input}'. For ${left}=${right}, ${currentOneStep.hint.toLowerCase()} = ${currentOneStep.answer} or ${validAnswers[1]}.`;
         feedback.style.color = 'red';
         streak = 0;
@@ -294,9 +287,9 @@ function loadTwoStepProblem() {
 }
 
 function checkTwoStep1() {
-    const input = document.getElementById('two-step-input1').value.trim();
+    const input = document.getElementById('two-step-input1').value.trim().toLowerCase();
     const feedback = document.getElementById('two-step-feedback1');
-    const validStep1 = [currentTwoStep.step1, currentTwoStep.step1.split('=')[1] + '=' + currentTwoStep.step1.split('=')[0]];
+    const validStep1 = [currentTwoStep.step1.toLowerCase(), currentTwoStep.step1.split('=')[1] + '=' + currentTwoStep.step1.split('=')[0].toLowerCase()];
     if (validStep1.includes(input)) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
@@ -311,9 +304,9 @@ function checkTwoStep1() {
 }
 
 function checkTwoStep2() {
-    const input = document.getElementById('two-step-input2').value.trim();
+    const input = document.getElementById('two-step-input2').value.trim().toLowerCase();
     const feedback = document.getElementById('two-step-feedback2');
-    const validStep2 = [currentTwoStep.step2, currentTwoStep.step2.split('=')[1] + '=x'];
+    const validStep2 = [currentTwoStep.step2.toLowerCase(), currentTwoStep.step2.split('=')[1] + '=x'];
     if (validStep2.includes(input)) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
@@ -332,8 +325,6 @@ function checkTwoStep2() {
             updateProgress();
         }, 1000);
     } else {
-        const [left] = currentTwoStep.step1.split('=');
-        const num = currentTwoStep.hint2.match(/\d+/) ? currentTwoStep.hint2.match(/\d+/)[0] : '';
         feedback.textContent = `Incorrect. You entered '${input}'. For ${currentTwoStep.step1}, ${currentTwoStep.hint2.toLowerCase()} = ${currentTwoStep.step2} or ${validStep2[1]}.`;
         feedback.style.color = 'red';
         streak = 0;
@@ -354,9 +345,9 @@ function loadMultiStepProblem() {
 }
 
 function checkMultiStep1() {
-    const input = document.getElementById('multi-step-input1').value.trim();
+    const input = document.getElementById('multi-step-input1').value.trim().toLowerCase();
     const feedback = document.getElementById('multi-step-feedback1');
-    const validStep1 = [currentMultiStep.step1, currentMultiStep.step1.split('=')[1] + '=' + currentMultiStep.step1.split('=')[0]];
+    const validStep1 = [currentMultiStep.step1.toLowerCase(), currentMultiStep.step1.split('=')[1] + '=' + currentMultiStep.step1.split('=')[0].toLowerCase()];
     if (validStep1.includes(input)) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
@@ -369,9 +360,9 @@ function checkMultiStep1() {
 }
 
 function checkMultiStep2() {
-    const input = document.getElementById('multi-step-input2').value.trim();
+    const input = document.getElementById('multi-step-input2').value.trim().toLowerCase();
     const feedback = document.getElementById('multi-step-feedback2');
-    const validStep2 = [currentMultiStep.step2, currentMultiStep.step2.split('=')[1] + '=' + currentMultiStep.step2.split('=')[0]];
+    const validStep2 = [currentMultiStep.step2.toLowerCase(), currentMultiStep.step2.split('=')[1] + '=' + currentMultiStep.step2.split('=')[0].toLowerCase()];
     if (validStep2.includes(input)) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
@@ -383,9 +374,9 @@ function checkMultiStep2() {
 }
 
 function checkMultiStep3() {
-    const input = document.getElementById('multi-step-input3').value.trim();
+    const input = document.getElementById('multi-step-input3').value.trim().toLowerCase();
     const feedback = document.getElementById('multi-step-feedback3');
-    const validStep3 = [currentMultiStep.step3, currentMultiStep.step3.split('=')[1] + '=x'];
+    const validStep3 = [currentMultiStep.step3.toLowerCase(), currentMultiStep.step3.split('=')[1] + '=x'];
     if (validStep3.includes(input)) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
@@ -421,9 +412,9 @@ function loadMixedProblem() {
 }
 
 function checkMixed() {
-    const input = document.getElementById('mixed-input').value.trim();
+    const input = document.getElementById('mixed-input').value.trim().toLowerCase();
     const feedback = document.getElementById('mixed-feedback');
-    const validAnswers = [currentMixed.answer, currentMixed.answer.split('=')[1] + '=x'];
+    const validAnswers = [currentMixed.answer.toLowerCase(), currentMixed.answer.split('=')[1] + '=x'];
     if (validAnswers.includes(input)) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
@@ -431,12 +422,8 @@ function checkMixed() {
         mixedCorrect++;
         if (streak >= streakThreshold && currentLevel < 4) {
             currentLevel++;
-            oneStepCorrect = 0;
-            twoStepCorrect = 0;
-            multiStepCorrect = 0;
-            mixedCorrect = 0;
-            streak = 0;
             activeStage = 'one-step';
+            streak = 0;
         } else if (streak >= streakThreshold && currentLevel === 4) {
             feedback.textContent = 'You’ve mastered all levels! Reset to play again.';
             streak = 0;
@@ -460,7 +447,7 @@ function checkMixed() {
 function initialize() {
     const savedSession = localStorage.getItem('equationHelperSession');
     if (savedSession) {
-        loadSessionSilently(); // Load without alert on page load
+        loadSessionSilently();
     } else {
         loadOneStepProblem();
         loadTwoStepProblem();
