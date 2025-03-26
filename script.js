@@ -66,7 +66,7 @@ const levels = [
             { eq: "4x-3=-15", step1: "4x=-12", step2: "x=-3", hint1: "Add 3 to both sides.", hint2: "Divide both sides by 4." },
             { eq: "2x+8=2", step1: "2x=-6", step2: "x=-3", hint1: "Subtract 8 from both sides.", hint2: "Divide both sides by 2." },
             { eq: "3x-5=-11", step1: "3x=-6", step2: "x=-2", hint1: "Add 5 to both sides.", hint2: "Divide both sides by 3." },
-            { eq: "6x+4=-8", step1: "6x TIT=-12", step2: "x=-2", hint1: "Subtract 4 from both sides.", hint2: "Divide both sides by 6." },
+            { eq: "6x+4=-8", step1: "6x=-12", step2: "x=-2", hint1: "Subtract 4 from both sides.", hint2: "Divide both sides by 6." },
             { eq: "5x-2=-17", step1: "5x=-15", step2: "x=-3", hint1: "Add 2 to both sides.", hint2: "Divide both sides by 5." },
             { eq: "4x+6=-6", step1: "4x=-12", step2: "x=-3", hint1: "Subtract 6 from both sides.", hint2: "Divide both sides by 4." },
             { eq: "2x-7=-11", step1: "2x=-4", step2: "x=-2", hint1: "Add 7 to both sides.", hint2: "Divide both sides by 2." }
@@ -89,7 +89,7 @@ const levels = [
             { eq: "3/5x=6", answer: "x=10", hint: "Multiply by 5 and divide by 3." },
             { eq: "1/2x=3", answer: "x=6", hint: "Multiply by 2." },
             { eq: "4/3x=8", answer: "x=6", hint: "Multiply by 3 and divide by 4." },
-            { eq: "2/5x=4", answer: "x=10", hint: "Multiply by 5 and divide by 2." },
+ohl            { eq: "2/5x=4", answer: "x=10", hint: "Multiply by 5 and divide by 2." },
             { eq: "3/4x=6", answer: "x=8", hint: "Multiply by 4 and divide by 3." },
             { eq: "1/3x=2", answer: "x=6", hint: "Multiply by 3." },
             { eq: "5/2x=10", answer: "x=4", hint: "Multiply by 2 and divide by 5." },
@@ -246,6 +246,7 @@ function loadOneStepProblem() {
     document.getElementById('one-step-hint').textContent = currentOneStep.hint;
     document.querySelector('#one-step .left-side').textContent = currentOneStep.eq.split('=')[0];
     document.querySelector('#one-step .right-side').textContent = currentOneStep.eq.split('=')[1];
+    document.getElementById('one-step-input').value = ''; // Clear input
 }
 
 function checkOneStep() {
@@ -284,6 +285,11 @@ function loadTwoStepProblem() {
     document.getElementById('two-step-hint2').textContent = currentTwoStep.hint2;
     document.querySelector('#two-step .left-side').textContent = currentTwoStep.eq.split('=')[0];
     document.querySelector('#two-step .right-side').textContent = currentTwoStep.eq.split('=')[1];
+    document.getElementById('two-step-input1').value = ''; // Clear step 1 input
+    document.getElementById('two-step-input2').value = ''; // Clear step 2 input
+    document.getElementById('two-step-feedback1').textContent = ''; // Clear feedback
+    document.getElementById('two-step-feedback2').textContent = ''; // Clear feedback
+    document.getElementById('two-step-step2').style.display = 'none'; // Reset step 2 visibility
 }
 
 function checkTwoStep1() {
@@ -306,7 +312,7 @@ function checkTwoStep1() {
 function checkTwoStep2() {
     const input = document.getElementById('two-step-input2').value.trim().toLowerCase();
     const feedback = document.getElementById('two-step-feedback2');
-    const validStep2 = [currentTwoStep.step2.toLowerCase(), currentTwoStep.step.Concurrent2.split('=')[1] + '=x'];
+    const validStep2 = [currentTwoStep.step2.toLowerCase(), currentTwoStep.step2.split('=')[1] + '=x'];
     if (validStep2.includes(input)) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
@@ -342,6 +348,9 @@ function loadMultiStepProblem() {
     document.getElementById('multi-step-hint3').textContent = currentMultiStep.hint3;
     document.querySelector('#multi-step .left-side').textContent = currentMultiStep.eq.split('=')[0];
     document.querySelector('#multi-step .right-side').textContent = currentMultiStep.eq.split('=')[1];
+    document.getElementById('multi-step-input1').value = ''; // Clear inputs
+    document.getElementById('multi-step-input2').value = '';
+    document.getElementById('multi-step-input3').value = '';
 }
 
 function checkMultiStep1() {
@@ -409,6 +418,7 @@ function loadMixedProblem() {
     document.getElementById('mixed-eq').textContent = currentMixed.eq;
     document.querySelector('#mixed .left-side').textContent = currentMixed.eq.split('=')[0];
     document.querySelector('#mixed .right-side').textContent = currentMixed.eq.split('=')[1];
+    document.getElementById('mixed-input').value = ''; // Clear input
 }
 
 function checkMixed() {
