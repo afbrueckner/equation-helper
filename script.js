@@ -457,8 +457,50 @@ function initialize() {
     }
 }
 
+// Custom Keyboard Logic
+let activeInput = null;
+
+function showKeyboard(input) {
+    activeInput = input;
+    document.getElementById('custom-keyboard').style.display = 'block';
+}
+
+function hideKeyboard() {
+    document.getElementById('custom-keyboard').style.display = 'none';
+    activeInput = null;
+}
+
+function handleKeyPress(value) {
+    if (!activeInput) return;
+    if (value === 'backspace') {
+        activeInput.value = activeInput.value.slice(0, -1);
+    } else if (value === 'enter') {
+        hideKeyboard();
+        if (activeStage === 'one-step') checkOneStep();
+        else if (activeStage === 'two-step' && document.getElementById('two-step-step2').style.display === 'none') checkTwoStep1();
+        else if (activeStage === 'two-step') checkTwoStep2();
+        else if (activeStage === 'multi-step' && document.getElementById('multi-step-step2').style.display === 'none') checkMultiStep1();
+        else if (activeStage === 'multi-step' && document.getElementById('multi-step-step3').style.display === 'none') checkMultiStep2();
+        else if (activeStage === 'multi-step') checkMultiStep3();
+        else if (activeStage === 'mixed') checkMixed();
+    } else {
+        activeInput.value += value;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initialize();
     document.getElementById('save-session').addEventListener('click', saveSession);
     document.getElementById('load-session').addEventListener('click', loadSession);
+
+    // Add event listeners to inputs for keyboard
+    document.querySelectorAll('input[type="text"]').forEach(input => {
+        input.addEventListener('focus', () => showKeyboard(input));
+        input.addEventListener('blur', () => setTimeout(hideKeyboard, 200)); // Delay to allow key press
+    });
+
+    // Add event listeners to keyboard keys
+    document.querySelectorAll('.key').forEach(key => {
+        key.addEventListener('click', () => handleKeyPress(key.dataset.value));
+    });
 });
