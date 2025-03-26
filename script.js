@@ -463,6 +463,8 @@ let activeInput = null;
 function showKeyboard(input) {
     activeInput = input;
     document.getElementById('custom-keyboard').style.display = 'block';
+    // Scroll the input into view above the keyboard
+    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function hideKeyboard() {
@@ -485,6 +487,7 @@ function handleKeyPress(value) {
         else if (activeStage === 'mixed') checkMixed();
     } else {
         activeInput.value += value;
+        activeInput.focus(); // Keep focus on input to prevent blur
     }
 }
 
@@ -496,7 +499,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add event listeners to inputs for keyboard
     document.querySelectorAll('input[type="text"]').forEach(input => {
         input.addEventListener('focus', () => showKeyboard(input));
-        input.addEventListener('blur', () => setTimeout(hideKeyboard, 200)); // Delay to allow key press
+    });
+
+    // Hide keyboard when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!document.getElementById('custom-keyboard').contains(e.target) && !e.target.matches('input[type="text"]')) {
+            hideKeyboard();
+        }
     });
 
     // Add event listeners to keyboard keys
