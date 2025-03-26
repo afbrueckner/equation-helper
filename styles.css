@@ -138,31 +138,33 @@ header button {
     left: 0;
     right: 0;
     background-color: #e6f3ff; /* Light blue background */
-    padding: 5px; /* Reduced padding */
+    padding: 5px; /* Minimal padding */
     border-top: 2px solid #6ab04c; /* Green border */
     z-index: 1000;
-    max-height: 200px; /* Limit height to avoid blocking too much */
+    height: 60px; /* Fixed slim height */
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+    white-space: nowrap; /* Keep keys in one line */
 }
 
 .keyboard-row {
     display: flex;
-    justify-content: center;
-    margin: 3px 0; /* Reduced margin */
+    justify-content: flex-start; /* Align left, scrollable */
 }
 
 .key {
-    width: 50px; /* Smaller size for less screen coverage */
-    height: 50px;
-    margin: 3px; /* Reduced margin */
-    font-size: 20px; /* Slightly smaller text */
+    width: 50px; /* Consistent width */
+    height: 50px; /* Matches height for slim profile */
+    margin: 0 2px; /* Tight horizontal spacing */
+    font-size: 20px; /* Readable text */
     background-color: #6ab04c; /* Green buttons */
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .key:hover {
@@ -170,5 +172,5 @@ header button {
 }
 
 .enter-key {
-    width: 120px; /* Slightly smaller Enter button */
+    width: 80px; /* Slightly wider Enter button */
 }
