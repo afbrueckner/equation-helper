@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 20px;
     background-color: #e6f3ff; /* Light blue for a cheerful vibe */
+    overflow-y: auto; /* Allow scrolling */
 }
 
 header {
@@ -137,22 +138,23 @@ header button {
     left: 0;
     right: 0;
     background-color: #e6f3ff; /* Light blue background */
-    padding: 10px;
+    padding: 5px; /* Reduced padding */
     border-top: 2px solid #6ab04c; /* Green border */
     z-index: 1000;
+    max-height: 200px; /* Limit height to avoid blocking too much */
 }
 
 .keyboard-row {
     display: flex;
     justify-content: center;
-    margin: 5px 0;
+    margin: 3px 0; /* Reduced margin */
 }
 
 .key {
-    width: 70px; /* Bigger for iPad touch */
-    height: 70px;
-    margin: 5px;
-    font-size: 24px; /* Larger text */
+    width: 50px; /* Smaller size for less screen coverage */
+    height: 50px;
+    margin: 3px; /* Reduced margin */
+    font-size: 20px; /* Slightly smaller text */
     background-color: #6ab04c; /* Green buttons */
     color: #fff;
     border: none;
@@ -168,5 +170,5 @@ header button {
 }
 
 .enter-key {
-    width: 150px; /* Wider Enter button */
+    width: 120px; /* Slightly smaller Enter button */
 }
