@@ -129,3 +129,44 @@ header button {
 .stage p[id$="-feedback"][style*="color: red"] {
     color: #e74c3c; /* Bright red for incorrect */
 }
+
+/* Custom Keyboard Styles */
+#custom-keyboard {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #e6f3ff; /* Light blue background */
+    padding: 10px;
+    border-top: 2px solid #6ab04c; /* Green border */
+    z-index: 1000;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.key {
+    width: 70px; /* Bigger for iPad touch */
+    height: 70px;
+    margin: 5px;
+    font-size: 24px; /* Larger text */
+    background-color: #6ab04c; /* Green buttons */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.key:hover {
+    background-color: #ff9f43; /* Orange hover */
+}
+
+.enter-key {
+    width: 150px; /* Wider Enter button */
+}
