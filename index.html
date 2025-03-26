@@ -32,7 +32,7 @@
         <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
         <p id="one-step-eq"></p>
         <p id="one-step-hint"></p>
-        <input type="text" id="one-step-input" placeholder="Enter your answer">
+        <input type="text" id="one-step-input" placeholder="Enter your answer" onfocus="this.blur()">
         <button onclick="checkOneStep()">Check</button>
         <p id="one-step-feedback"></p>
     </div>
@@ -41,13 +41,13 @@
         <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
         <p id="two-step-eq"></p>
         <p id="two-step-hint1"></p>
-        <input type="text" id="two-step-input1" placeholder="Step 1 answer">
+        <input type="text" id="two-step-input1" placeholder="Step 1 answer" onfocus="this.blur()">
         <button onclick="checkTwoStep1()">Check</button>
         <p id="two-step-feedback1"></p>
         <div id="two-step-step2" style="display: none;">
             <p id="two-step-eq2"></p>
             <p id="two-step-hint2"></p>
-            <input type="text" id="two-step-input2" placeholder="Step 2 answer">
+            <input type="text" id="two-step-input2" placeholder="Step 2 answer" onfocus="this.blur()">
             <button onclick="checkTwoStep2()">Check</button>
             <p id="two-step-feedback2"></p>
         </div>
@@ -57,20 +57,20 @@
         <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
         <p id="multi-step-eq"></p>
         <p id="multi-step-hint1"></p>
-        <input type="text" id="multi-step-input1" placeholder="Step 1 answer">
+        <input type="text" id="multi-step-input1" placeholder="Step 1 answer" onfocus="this.blur()">
         <button onclick="checkMultiStep1()">Check</button>
         <p id="multi-step-feedback1"></p>
         <div id="multi-step-step2" style="display: none;">
             <p id="multi-step-eq2"></p>
             <p id="multi-step-hint2"></p>
-            <input type="text" id="multi-step-input2" placeholder="Step 2 answer">
+            <input type="text" id="multi-step-input2" placeholder="Step 2 answer" onfocus="this.blur()">
             <button onclick="checkMultiStep2()">Check</button>
             <p id="multi-step-feedback2"></p>
         </div>
         <div id="multi-step-step3" style="display: none;">
             <p id="multi-step-eq3"></p>
             <p id="multi-step-hint3"></p>
-            <input type="text" id="multi-step-input3" placeholder="Step 3 answer">
+            <input type="text" id="multi-step-input3" placeholder="Step 3 answer" onfocus="this.blur()">
             <button onclick="checkMultiStep3()">Check</button>
             <p id="multi-step-feedback3"></p>
         </div>
@@ -79,38 +79,30 @@
         <h2>Mixed Equations</h2>
         <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
         <p id="mixed-eq"></p>
-        <input type="text" id="mixed-input" placeholder="Enter your answer">
+        <input type="text" id="mixed-input" placeholder="Enter your answer" onfocus="this.blur()">
         <button onclick="checkMixed()">Check</button>
         <p id="mixed-feedback"></p>
     </div>
 
-    <!-- Custom Keyboard -->
+    <!-- Custom Keyboard (Single Row Landscape) -->
     <div id="custom-keyboard" style="display: none;">
         <div class="keyboard-row">
+            <button class="key" data-value="0">0</button>
+            <button class="key" data-value="1">1</button>
+            <button class="key" data-value="2">2</button>
+            <button class="key" data-value="3">3</button>
+            <button class="key" data-value="4">4</button>
+            <button class="key" data-value="5">5</button>
+            <button class="key" data-value="6">6</button>
             <button class="key" data-value="7">7</button>
             <button class="key" data-value="8">8</button>
             <button class="key" data-value="9">9</button>
             <button class="key" data-value="+">+</button>
-        </div>
-        <div class="keyboard-row">
-            <button class="key" data-value="4">4</button>
-            <button class="key" data-value="5">5</button>
-            <button class="key" data-value="6">6</button>
             <button class="key" data-value="-">-</button>
-        </div>
-        <div class="keyboard-row">
-            <button class="key" data-value="1">1</button>
-            <button class="key" data-value="2">2</button>
-            <button class="key" data-value="3">3</button>
             <button class="key" data-value="/">/</button>
-        </div>
-        <div class="keyboard-row">
-            <button class="key" data-value="0">0</button>
             <button class="key" data-value="x">x</button>
             <button class="key" data-value="=">=</button>
             <button class="key" data-value="backspace">⌫</button>
-        </div>
-        <div class="keyboard-row">
             <button class="key enter-key" data-value="enter">Enter</button>
         </div>
     </div>
