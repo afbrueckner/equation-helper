@@ -66,7 +66,7 @@ const levels = [
             { eq: "4x-3=-15", step1: "4x=-12", step2: "x=-3", hint1: "Add 3 to both sides.", hint2: "Divide both sides by 4." },
             { eq: "2x+8=2", step1: "2x=-6", step2: "x=-3", hint1: "Subtract 8 from both sides.", hint2: "Divide both sides by 2." },
             { eq: "3x-5=-11", step1: "3x=-6", step2: "x=-2", hint1: "Add 5 to both sides.", hint2: "Divide both sides by 3." },
-            { eq: "6x+4=-8", step1: "6x=-12", step2: "x=-2", hint1: "Subtract 4 from both sides.", hint2: "Divide both sides by 6." },
+            { eq: "6x+4=-8", step1: "6x TIT=-12", step2: "x=-2", hint1: "Subtract 4 from both sides.", hint2: "Divide both sides by 6." },
             { eq: "5x-2=-17", step1: "5x=-15", step2: "x=-3", hint1: "Add 2 to both sides.", hint2: "Divide both sides by 5." },
             { eq: "4x+6=-6", step1: "4x=-12", step2: "x=-3", hint1: "Subtract 6 from both sides.", hint2: "Divide both sides by 4." },
             { eq: "2x-7=-11", step1: "2x=-4", step2: "x=-2", hint1: "Add 7 to both sides.", hint2: "Divide both sides by 2." }
@@ -306,7 +306,7 @@ function checkTwoStep1() {
 function checkTwoStep2() {
     const input = document.getElementById('two-step-input2').value.trim().toLowerCase();
     const feedback = document.getElementById('two-step-feedback2');
-    const validStep2 = [currentTwoStep.step2.toLowerCase(), currentTwoStep.step2.split('=')[1] + '=x'];
+    const validStep2 = [currentTwoStep.step2.toLowerCase(), currentTwoStep.step.Concurrent2.split('=')[1] + '=x'];
     if (validStep2.includes(input)) {
         feedback.textContent = 'Correct!';
         feedback.style.color = 'green';
@@ -463,7 +463,6 @@ let activeInput = null;
 function showKeyboard(input) {
     activeInput = input;
     document.getElementById('custom-keyboard').style.display = 'block';
-    // Scroll the input into view above the keyboard
     input.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
@@ -487,7 +486,6 @@ function handleKeyPress(value) {
         else if (activeStage === 'mixed') checkMixed();
     } else {
         activeInput.value += value;
-        activeInput.focus(); // Keep focus on input to prevent blur
     }
 }
 
@@ -498,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add event listeners to inputs for keyboard
     document.querySelectorAll('input[type="text"]').forEach(input => {
-        input.addEventListener('focus', () => showKeyboard(input));
+        input.addEventListener('click', () => showKeyboard(input)); // Use click instead of focus
     });
 
     // Hide keyboard when clicking outside
