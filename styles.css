@@ -99,11 +99,8 @@ button:hover {
     display: none; /* Hidden by default */
     position: fixed; /* Fixed to bottom */
     bottom: 10px; /* 10px from bottom */
-    left: 0; /* Start from left edge */
-    right: 0; /* Extend to right edge */
-    margin: 0 auto; /* Center horizontally */
-    width: fit-content; /* Fit to content width */
-    max-width: 90vw; /* Limit width to 90% of viewport */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset by half its width */
     z-index: 1000; /* On top of other content */
     background: #fff; /* White background */
     padding: 10px; /* Padding around keys */
@@ -113,6 +110,7 @@ button:hover {
     flex-wrap: nowrap !important; /* No wrapping */
     justify-content: center; /* Center keys within keyboard */
     align-items: center; /* Vertically align keys */
+    max-width: 90vw; /* Limit width */
     overflow-x: auto; /* Scroll horizontally if needed */
 }
 
