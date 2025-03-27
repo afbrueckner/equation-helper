@@ -145,7 +145,7 @@ function updateProgress() {
     document.getElementById('streak').textContent = `${streak}/${streakThreshold}`;
     document.getElementById('current-user').textContent = currentUser ? `User: ${currentUser}` : 'No user selected';
     setActiveStage();
-    saveUserProgress(); // Auto-save after progress updates
+    saveUserProgress();
 }
 
 function setActiveStage() {
@@ -185,7 +185,7 @@ function saveUserProgress() {
     if (!currentUser) return;
     const progress = { currentLevel, oneStepCorrect, twoStepCorrect, multiStepCorrect, mixedCorrect, streak, activeStage };
     localStorage.setItem(`equationHelper_${currentUser}`, JSON.stringify(progress));
-    console.log(`Saved progress for ${currentUser}`);
+    updateUserList();
 }
 
 function loadUserProgress() {
@@ -205,9 +205,8 @@ function loadUserProgress() {
         loadMultiStepProblem();
         loadMixedProblem();
         updateProgress();
-        console.log(`Loaded progress for ${currentUser}`);
     } else {
-        resetGame(); // New user starts fresh
+        resetGame();
     }
 }
 
@@ -218,6 +217,7 @@ function promptForUsername() {
         if (username) {
             currentUser = username.trim();
             localStorage.setItem('lastUser', currentUser);
+            saveUserProgress(); // Save new user
             loadUserProgress();
         } else {
             alert('Please enter a valid username to start.');
@@ -227,12 +227,42 @@ function promptForUsername() {
         currentUser = username;
         loadUserProgress();
     }
+    updateUserList();
+}
+
+function updateUserList() {
+    const userSelect = document.getElementById('user-select');
+    userSelect.innerHTML = '<option value="">Select User</option>';
+    const users = Object.keys(localStorage).filter(key => key.startsWith('equationHelper_')).map(key => key.replace('equationHelper_', ''));
+    users.forEach(user => {
+        const option = document.createElement('option');
+        option.value = user;
+        option.textContent = user;
+        if (user === currentUser) option.selected = true;
+        userSelect.appendChild(option);
+    });
+    const newUserOption = document.createElement('option');
+    newUserOption.value = 'new';
+    newUserOption.textContent = 'New User';
+    userSelect.appendChild(newUserOption);
 }
 
 function switchUser() {
-    localStorage.removeItem('lastUser');
-    currentUser = null;
-    promptForUsername();
+    const userSelect = document.getElementById('user-select');
+    const selectedUser = userSelect.value;
+    if (selectedUser === 'new') {
+        const newUser = prompt('Enter new username:');
+        if (newUser) {
+            currentUser = newUser.trim();
+            localStorage.setItem('lastUser', currentUser);
+            resetGame();
+            saveUserProgress();
+        }
+    } else if (selectedUser && selectedUser !== currentUser) {
+        currentUser = selectedUser;
+        localStorage.setItem('lastUser', currentUser);
+        loadUserProgress();
+    }
 }
 
 function loadOneStepProblem() {
@@ -245,9 +275,6 @@ function loadOneStepProblem() {
         document.querySelector('#one-step .left-side').textContent = currentOneStep.eq.split('=')[0];
         document.querySelector('#one-step .right-side').textContent = currentOneStep.eq.split('=')[1];
         document.getElementById('one-step-input').value = '';
-        console.log('One-step loaded:', currentOneStep.eq);
-    } else {
-        console.error('One-step elements missing');
     }
 }
 
@@ -296,16 +323,12 @@ function loadTwoStepProblem() {
         document.getElementById('two-step-feedback1').textContent = '';
         document.getElementById('two-step-feedback2').textContent = '';
         document.getElementById('two-step-step2').style.display = 'none';
-        console.log('Two-step loaded:', currentTwoStep.eq);
-    } else {
-        console.error('Two-step elements missing');
     }
 }
 
 function checkTwoStep1() {
     const input = document.getElementById('two-step-input1').value.trim().toLowerCase();
     const feedback = document.getElementById('two-step-feedback1');
-    console.log('Step 1 input:', input, 'Expected:', currentTwoStep.step1);
     const validStep1 = [currentTwoStep.step1.toLowerCase(), currentTwoStep.step1.split('=')[1] + '=' + currentTwoStep.step1.split('=')[0]];
     if (validStep1.includes(input)) {
         feedback.textContent = 'Correct!';
@@ -320,7 +343,6 @@ function checkTwoStep1() {
 function checkTwoStep2() {
     const input = document.getElementById('two-step-input2').value.trim().toLowerCase();
     const feedback = document.getElementById('two-step-feedback2');
-    console.log('Step 2 input:', input, 'Expected:', currentTwoStep.step2);
     const validStep2 = [currentTwoStep.step2.toLowerCase(), currentTwoStep.step2.split('=')[1] + '=x'];
     if (validStep2.includes(input)) {
         feedback.textContent = 'Correct!';
@@ -364,9 +386,6 @@ function loadMultiStepProblem() {
         document.getElementById('multi-step-input1').value = '';
         document.getElementById('multi-step-input2').value = '';
         document.getElementById('multi-step-input3').value = '';
-        console.log('Multi-step loaded:', currentMultiStep.eq);
-    } else {
-        console.error('Multi-step elements missing');
     }
 }
 
@@ -437,9 +456,6 @@ function loadMixedProblem() {
         document.querySelector('#mixed .left-side').textContent = currentMixed.eq.split('=')[0];
         document.querySelector('#mixed .right-side').textContent = currentMixed.eq.split('=')[1];
         document.getElementById('mixed-input').value = '';
-        console.log('Mixed loaded:', currentMixed.eq);
-    } else {
-        console.error('Mixed elements missing');
     }
 }
 
@@ -485,7 +501,8 @@ let activeInput = null;
 
 function showKeyboard(input) {
     activeInput = input;
-    document.getElementById('custom-keyboard').style.display = 'block';
+    const keyboard = document.getElementById('custom-keyboard');
+    keyboard.style.display = 'flex'; // Use flex for centering
 }
 
 function hideKeyboard() {
@@ -515,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initialize();
     document.getElementById('save-session').addEventListener('click', () => saveUserProgress());
     document.getElementById('load-session').addEventListener('click', () => loadUserProgress());
-    document.getElementById('switch-user').addEventListener('click', switchUser);
+    document.getElementById('user-select').addEventListener('change', switchUser);
     document.querySelectorAll('input[type="text"]').forEach(input => {
         input.addEventListener('click', () => showKeyboard(input));
     });
