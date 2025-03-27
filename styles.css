@@ -99,10 +99,11 @@ button:hover {
     display: none; /* Hidden by default */
     position: fixed; /* Fixed to bottom */
     bottom: 10px; /* 10px from bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Offset by half its width */
-    width: auto; /* Let it size naturally, up to max-width */
-    max-width: 90vw; /* Limit to 90% of viewport width */
+    left: 0; /* Start from left edge */
+    right: 0; /* Extend to right edge */
+    margin: 0 auto; /* Center horizontally */
+    width: fit-content; /* Fit to content width */
+    max-width: 90vw; /* Limit width to 90% of viewport */
     z-index: 1000; /* On top of other content */
     background: #fff; /* White background */
     padding: 10px; /* Padding around keys */
@@ -113,7 +114,6 @@ button:hover {
     justify-content: center; /* Center keys within keyboard */
     align-items: center; /* Vertically align keys */
     overflow-x: auto; /* Scroll horizontally if needed */
-    box-sizing: content-box; /* Ensure padding doesn’t affect width */
 }
 
 /* Individual keys */
@@ -130,7 +130,6 @@ button:hover {
     color: white !important; /* White text, forced */
     border: 1px solid #388E3C; /* Darker green border */
     border-radius: 5px; /* Rounded corners */
-    flex-shrink: 0; /* Prevent keys from shrinking */
 }
 
 .key:hover {
