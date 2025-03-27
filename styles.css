@@ -133,44 +133,34 @@ header button {
 
 /* Custom Keyboard Styles */
 #custom-keyboard {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #e6f3ff; /* Light blue background */
-    padding: 5px; /* Minimal padding */
-    border-top: 2px solid #6ab04c; /* Green border */
-    z-index: 1000;
-    height: 60px; /* Fixed slim height */
-    overflow-x: auto; /* Allow horizontal scrolling if needed */
-    white-space: nowrap; /* Keep keys in one line */
-}
-
-.keyboard-row {
-    display: flex;
-    justify-content: flex-start; /* Align left, scrollable */
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed position to stay centered */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset by half its size */
+    z-index: 1000; /* Ensure it’s on top */
+    background: #fff; /* Background color */
+    padding: 10px; /* Padding around keys */
+    border: 1px solid #ccc; /* Border for visibility */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    flex-wrap: wrap; /* Allow keys to wrap on small screens */
+    justify-content: center; /* Center keys horizontally */
+    align-items: center; /* Center keys vertically */
+    max-width: 90vw; /* Limit width on small screens */
+    max-height: 90vh; /* Limit height on small screens */
+    overflow: auto; /* Scroll if too large */
 }
 
 .key {
-    width: 50px; /* Consistent width */
-    height: 50px; /* Matches height for slim profile */
-    margin: 0 2px; /* Tight horizontal spacing */
-    font-size: 20px; /* Readable text */
-    background-color: #6ab04c; /* Green buttons */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0; /* Prevent shrinking */
-}
-
-.key:hover {
-    background-color: #ff9f43; /* Orange hover */
-}
-
-.enter-key {
-    width: 80px; /* Slightly wider Enter button */
+    width: 40px; /* Fixed width for consistency */
+    height: 40px; /* Fixed height */
+    margin: 5px; /* Space between keys */
+    font-size: 16px; /* Readable text */
+    cursor: pointer; /* Hand cursor on hover */
+    display: flex; /* Center text in key */
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    background: #f0f0f0; /* Light background */
+    border: 1px solid #999; /* Border for definition */
+    border-radius: 5px; /* Rounded corners */
 }
