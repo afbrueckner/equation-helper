@@ -1,176 +1,135 @@
-body {
+/* Reset default margins and ensure full height */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     font-family: Arial, sans-serif;
-    margin: 0;
+    background-color: #f5f5f5;
+}
+
+/* Center the main content */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
-    background-color: #e6f3ff; /* Light blue for a cheerful vibe */
-    overflow-y: auto; /* Allow scrolling */
+    box-sizing: border-box;
 }
 
-header {
-    text-align: center;
+/* Container for sections */
+section {
+    width: 90%;
+    max-width: 800px; /* Limit width for readability */
     margin-bottom: 20px;
-}
-
-header h1 {
-    margin: 0;
-    color: #ff6f61; /* Coral for a warm, upbeat title */
-}
-
-header select {
-    padding: 8px;
-    font-size: 18px;
-    background-color: #fff;
-    border: 2px solid #6ab04c; /* Bright green border */
-    border-radius: 5px;
-}
-
-#progress {
-    background-color: #fff;
     padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#progress h2 {
-    margin-top: 0;
-    color: #3498db; /* Bright blue for headings */
-}
-
-#progress p {
-    margin: 5px 0;
-    color: #2c3e50; /* Darker blue-gray for readability */
-}
-
-.stage {
     background-color: #fff;
-    padding: 20px;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    display: none;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    box-sizing: border-box;
 }
 
-.stage.active {
-    display: block;
+/* Active section highlight */
+section.active {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
-.stage h2 {
-    margin-top: 0;
-    color: #3498db; /* Bright blue for stage titles */
-    text-align: center;
-}
-
-.stage p {
-    margin: 10px 0;
-    color: #2c3e50; /* Darker blue-gray for text */
-}
-
-.equation {
-    font-size: 20px;
-    margin: 10px 0;
-    text-align: center;
-}
-
-input[type="text"] {
-    padding: 8px;
+/* Equation and hint text */
+.equation, .hint {
     font-size: 18px;
-    width: 250px; /* Slightly wider for iPad */
-    display: block;
-    margin: 10px auto;
-    border: 2px solid #6ab04c; /* Bright green border */
-    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center; /* Center text within sections */
 }
 
+/* Input fields */
+input[type="text"] {
+    width: 100px;
+    padding: 5px;
+    font-size: 16px;
+    margin: 5px auto;
+    display: block; /* Center input */
+}
+
+/* Buttons */
 button {
-    padding: 10px 20px; /* Larger padding for bigger buttons */
-    font-size: 18px; /* Larger text */
-    margin: 0 5px;
-    cursor: pointer;
-    display: inline-block;
-    background-color: #6ab04c; /* Bright green for buttons */
-    color: #fff;
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s; /* Smooth hover effect */
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* Ensure buttons in user-info stay inline */
+#user-info button {
+    display: inline-block;
 }
 
 button:hover {
-    background-color: #ff9f43; /* Orange on hover for energy */
+    background-color: #45a049;
 }
 
-.stage button {
-    margin: 10px auto;
-    display: block;
-    padding: 15px 30px; /* Even bigger for "Check" buttons */
-    font-size: 20px; /* Larger text for touch */
-}
-
-/* Header buttons (Save, Load, Reset) stay smaller but styled */
-header button {
-    padding: 8px 16px;
+/* Feedback text */
+.feedback {
     font-size: 16px;
-}
-
-/* Feedback text alignment and colors */
-.stage p[id$="-feedback"] {
+    margin: 5px 0;
     text-align: center;
 }
 
-.stage p[id$="-feedback"][style*="color: green"] {
-    color: #27ae60; /* Vibrant green for correct */
+/* Progress and user info */
+#progress, #user-info {
+    width: 90%;
+    max-width: 800px;
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: center;
 }
 
-.stage p[id$="-feedback"][style*="color: red"] {
-    color: #e74c3c; /* Bright red for incorrect */
+/* Level and user select dropdowns */
+#level-select, #user-select {
+    padding: 5px;
+    font-size: 14px;
+    margin-left: 10px;
 }
 
-/* Custom Keyboard Styles */
+/* Custom keyboard styling */
 #custom-keyboard {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #e6f3ff; /* Light blue background */
-    padding: 5px; /* Minimal padding */
-    border-top: 2px solid #6ab04c; /* Green border */
-    z-index: 1000;
-    height: 60px; /* Fixed slim height */
-    overflow-x: auto; /* Allow horizontal scrolling if needed */
-    white-space: nowrap; /* Keep keys in one line */
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed to bottom */
+    bottom: 10px; /* 10px from bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset by half its width */
+    z-index: 1000; /* On top of other content */
+    background: #fff; /* White background */
+    padding: 10px; /* Padding around keys */
+    border: 1px solid #ccc; /* Border for visibility */
+    display: flex !important; /* Force horizontal layout */
+    flex-direction: row !important; /* Explicitly horizontal */
+    flex-wrap: nowrap !important; /* No wrapping */
+    justify-content: center; /* Center keys within keyboard */
+    align-items: center; /* Vertically align keys */
+    max-width: 90vw; /* Limit width */
+    overflow-x: auto; /* Scroll horizontally if needed */
 }
 
-.keyboard-row {
-    display: flex;
-    justify-content: flex-start; /* Align left, scrollable */
-}
-
+/* Individual keys */
 .key {
-    width: 50px; /* Consistent width */
-    height: 50px; /* Matches height for slim profile */
-    margin: 0 2px; /* Tight horizontal spacing */
-    font-size: 20px; /* Readable text */
-    background-color: #6ab04c; /* Green buttons */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0; /* Prevent shrinking */
+    width: 50px; /* Consistent size */
+    height: 50px; /* Matching height */
+    margin: 5px; /* Space between keys */
+    font-size: 18px; /* Readable text */
+    cursor: pointer; /* Hand cursor */
+    display: flex; /* Center text in key */
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+    background: #4CAF50 !important; /* Green background, forced */
+    color: white !important; /* White text, forced */
+    border: 1px solid #388E3C; /* Darker green border */
+    border-radius: 5px; /* Rounded corners */
 }
 
 .key:hover {
-    background-color: #ff9f43; /* Orange hover */
-}
-
-.enter-key {
-    width: 80px; /* Slightly wider Enter button */
+    background: #45a049 !important; /* Darker green on hover, forced */
 }
