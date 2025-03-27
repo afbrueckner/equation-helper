@@ -3,8 +3,8 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Fun, kid-friendly font with fallback */
+    background-color: #ffffff; /* White background for clarity */
 }
 
 /* Center the main content */
@@ -24,73 +24,85 @@ header {
     text-align: center;
 }
 
+header h1 {
+    color: #0288d1; /* Bright blue for the app title */
+    font-size: 32px; /* Bigger for impact */
+    margin: 0;
+}
+
 /* Container for stages */
 .stage {
     width: 90%;
     max-width: 800px;
     margin-bottom: 20px;
-    padding: 20px; /* Slightly more padding for breathing room */
-    background-color: #f0f8ff; /* Light blue background (AliceBlue) */
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 20px;
+    background-color: #e0f7fa; /* Light cyan for vibrance */
+    border: 2px solid #0288d1; /* Bold blue border */
+    border-radius: 8px; /* Slightly larger radius for softness */
     box-sizing: border-box;
-    display: none; /* Hidden by default */
-    text-align: center; /* Center all text inside by default */
+    display: none;
+    text-align: center;
 }
 
 /* Active stage visibility */
 .stage.active {
-    display: block; /* Show only the active stage */
-    border-color: #4CAF50;
-    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    display: block;
+    border-color: #ff5722; /* Orange for active stage */
+    box-shadow: 0 0 8px rgba(255, 87, 34, 0.5); /* Vibrant shadow */
 }
 
 /* Stage titles */
 .stage h2 {
-    color: #00695c; /* Teal color for titles */
-    font-size: 24px;
-    margin: 0 0 15px 0; /* Space below title */
+    color: #0288d1; /* Bright blue for titles */
+    font-size: 28px; /* Bold and larger */
+    margin: 0 0 15px 0;
 }
 
 /* Equation and hint text */
 .equation, p[id$="-hint"], p[id$="-hint1"], p[id$="-hint2"], p[id$="-hint3"] {
-    font-size: 18px;
-    margin: 10px 0;
+    font-size: 20px; /* Slightly bigger for readability */
+    margin: 12px 0;
     text-align: center;
+    color: #333; /* Dark gray for contrast */
 }
 
 /* Input fields */
 input[type="text"] {
-    width: 100px;
-    padding: 5px;
-    font-size: 16px;
-    margin: 5px auto;
+    width: 120px; /* Wider for ease of use */
+    padding: 8px;
+    font-size: 18px;
+    margin: 8px auto;
     display: block;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    border: 2px solid #0288d1; /* Blue border */
+    border-radius: 5px;
+    background-color: #fff;
 }
 
 /* Buttons */
 button {
-    padding: 8px 15px;
-    font-size: 14px;
-    background-color: #4CAF50;
+    padding: 10px 20px; /* Larger for boldness */
+    font-size: 16px;
+    background-color: #ff5722; /* Vibrant orange */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin: 5px;
-    transition: background-color 0.3s; /* Smooth hover effect */
+    margin: 8px;
+    transition: background-color 0.3s, transform 0.1s; /* Hover and click effects */
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #e64a19; /* Darker orange */
+}
+
+button:active {
+    transform: scale(0.95); /* Slight press effect */
 }
 
 /* Feedback text */
 p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"] {
-    font-size: 16px;
-    margin: 5px 0;
+    font-size: 18px;
+    margin: 8px 0;
     text-align: center;
 }
 
@@ -99,35 +111,42 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
     width: 90%;
     max-width: 800px;
     margin: 10px 0;
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 2px solid #0288d1; /* Blue border */
+    border-radius: 8px;
+}
+
+#progress h2 {
+    color: #0288d1; /* Blue for progress title */
+    font-size: 24px;
+    margin: 0 0 10px 0;
 }
 
 /* Level and user select dropdowns */
 #level-select, #user-select {
-    padding: 5px;
-    font-size: 14px;
+    padding: 8px;
+    font-size: 16px;
     margin-left: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    border: 2px solid #0288d1;
+    border-radius: 5px;
+    background-color: #fff;
 }
 
 /* Custom keyboard styling */
 #custom-keyboard {
-    display: none; /* Hidden by default, toggled by JS */
+    display: none;
     position: fixed;
-    bottom: 10px; /* 10px from bottom */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Offset by half its width */
-    z-index: 1000; /* On top of other content */
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
     background: #fff;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 15px;
+    border: 2px solid #0288d1;
+    border-radius: 8px;
     max-width: 90vw;
     overflow-x: auto;
 }
@@ -143,21 +162,25 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
 
 /* Individual keys */
 .key {
-    width: 50px;
-    height: 50px;
+    width: 55px; /* Slightly larger */
+    height: 55px;
     margin: 5px;
-    font-size: 18px;
+    font-size: 20px; /* Bigger for readability */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #4CAF50;
+    background: #ff5722; /* Orange to match buttons */
     color: white;
-    border: 1px solid #388E3C;
+    border: 2px solid #e64a19; /* Darker orange border */
     border-radius: 5px;
-    transition: background-color 0.3s; /* Smooth hover effect */
+    transition: background-color 0.3s, transform 0.1s;
 }
 
 .key:hover {
-    background: #45a049;
+    background: #e64a19;
+}
+
+.key:active {
+    transform: scale(0.95);
 }
