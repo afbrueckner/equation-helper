@@ -1,43 +1,100 @@
-#custom-keyboard {
-    display: none; /* Hidden by default, toggled by JS */
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    background: #fff;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    max-width: 90vw; /* Limit width to 90% of viewport */
-    overflow-x: auto; /* Scroll if keys overflow */
+/* Reset default margins and ensure full height */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
 }
 
-/* Keyboard row container */
-.keyboard-row {
+/* Center the main content */
+body {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center; /* Center keys within the row */
+    flex-direction: column;
     align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Individual keys */
-.key {
-    width: 50px;
-    height: 50px;
-    margin: 5px;
+/* Header styling */
+header {
+    width: 90%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Container for stages */
+.stage {
+    width: 90%;
+    max-width: 800px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: none; /* Hidden by default */
+}
+
+/* Active stage visibility */
+.stage.active {
+    display: block; /* Show only the active stage */
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Equation and hint text */
+.equation, p[id$="-hint"], p[id$="-hint1"], p[id$="-hint2"], p[id$="-hint3"] {
     font-size: 18px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #4CAF50;
-    color: white;
-    border: 1px solid #388E3C;
-    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
 }
 
-.key:hover {
-    background: #45a049;
+/* Input fields */
+input[type="text"] {
+    width: 100px;
+    padding: 5px;
+    font-size: 16px;
+    margin: 5px auto;
+    display: block;
+}
+
+/* Buttons */
+button {
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Feedback text */
+p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"] {
+    font-size: 16px;
+    margin: 5px 0;
+    text-align: center;
+}
+
+/* Progress and user info */
+#progress, #user-info {
+    width: 90%;
+    max-width: 800px;
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Level and user select dropdowns */
+#level-select, #user-select {
+    padding: 5px;
+    font-size: 14px;
+    margin-left: 10px;
 }
