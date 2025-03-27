@@ -1,166 +1,108 @@
+/* General page styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #e6f3ff; /* Light blue for a cheerful vibe */
-    overflow-y: auto; /* Allow scrolling */
+    background-color: #f5f5f5;
 }
 
-header {
-    text-align: center;
+/* Container for sections */
+section {
     margin-bottom: 20px;
-}
-
-header h1 {
-    margin: 0;
-    color: #ff6f61; /* Coral for a warm, upbeat title */
-}
-
-header select {
-    padding: 8px;
-    font-size: 18px;
-    background-color: #fff;
-    border: 2px solid #6ab04c; /* Bright green border */
-    border-radius: 5px;
-}
-
-#progress {
-    background-color: #fff;
     padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#progress h2 {
-    margin-top: 0;
-    color: #3498db; /* Bright blue for headings */
-}
-
-#progress p {
-    margin: 5px 0;
-    color: #2c3e50; /* Darker blue-gray for readability */
-}
-
-.stage {
     background-color: #fff;
-    padding: 20px;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    display: none;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-.stage.active {
-    display: block;
+/* Active section highlight */
+section.active {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
-.stage h2 {
-    margin-top: 0;
-    color: #3498db; /* Bright blue for stage titles */
-    text-align: center;
-}
-
-.stage p {
-    margin: 10px 0;
-    color: #2c3e50; /* Darker blue-gray for text */
-}
-
-.equation {
-    font-size: 20px;
-    margin: 10px 0;
-    text-align: center;
-}
-
-input[type="text"] {
-    padding: 8px;
+/* Equation and hint text */
+.equation, .hint {
     font-size: 18px;
-    width: 250px; /* Slightly wider for iPad */
-    display: block;
-    margin: 10px auto;
-    border: 2px solid #6ab04c; /* Bright green border */
-    border-radius: 5px;
+    margin: 10px 0;
 }
 
+/* Input fields */
+input[type="text"] {
+    width: 100px;
+    padding: 5px;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Buttons */
 button {
-    padding: 10px 20px; /* Larger padding for bigger buttons */
-    font-size: 18px; /* Larger text */
-    margin: 0 5px;
-    cursor: pointer;
-    display: inline-block;
-    background-color: #6ab04c; /* Bright green for buttons */
-    color: #fff;
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s; /* Smooth hover effect */
+    cursor: pointer;
+    margin: 5px;
 }
 
 button:hover {
-    background-color: #ff9f43; /* Orange on hover for energy */
+    background-color: #45a049;
 }
 
-.stage button {
-    margin: 10px auto;
-    display: block;
-    padding: 15px 30px; /* Even bigger for "Check" buttons */
-    font-size: 20px; /* Larger text for touch */
+/* Feedback text */
+.feedback {
+    font-size: 16px;
+    margin: 5px 0;
 }
 
-/* Header buttons (Save, Load, Reset) stay smaller but styled */
-header button {
-    padding: 8px 16px;
+/* Progress and user info */
+#progress, #user-info {
+    margin: 10px 0;
     font-size: 16px;
 }
 
-/* Feedback text alignment and colors */
-.stage p[id$="-feedback"] {
-    text-align: center;
+/* Level and user select dropdowns */
+#level-select, #user-select {
+    padding: 5px;
+    font-size: 14px;
+    margin-left: 10px;
 }
 
-.stage p[id$="-feedback"][style*="color: green"] {
-    color: #27ae60; /* Vibrant green for correct */
-}
-
-.stage p[id$="-feedback"][style*="color: red"] {
-    color: #e74c3c; /* Bright red for incorrect */
-}
-
-/* Custom Keyboard Styles */
+/* Custom keyboard styling */
 #custom-keyboard {
     display: none; /* Hidden by default */
-    position: fixed; /* Fixed position to stay centered */
-    top: 50%; /* Center vertically */
+    position: fixed; /* Fixed to stay at bottom */
+    bottom: 10px; /* 10px from bottom */
     left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Offset by half its size */
-    z-index: 1000; /* Ensure it’s on top */
-    background: #fff; /* Background color */
+    transform: translateX(-50%); /* Offset by half its width */
+    z-index: 1000; /* On top of other content */
+    background: #fff; /* White background */
     padding: 10px; /* Padding around keys */
     border: 1px solid #ccc; /* Border for visibility */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
-    flex-wrap: wrap; /* Allow keys to wrap on small screens */
-    justify-content: center; /* Center keys horizontally */
-    align-items: center; /* Center keys vertically */
+    display: flex; /* Horizontal layout */
+    flex-direction: row; /* Explicitly horizontal */
+    justify-content: center; /* Center keys within keyboard */
     max-width: 90vw; /* Limit width on small screens */
-    max-height: 90vh; /* Limit height on small screens */
-    overflow: auto; /* Scroll if too large */
+    overflow-x: auto; /* Scroll horizontally if too wide */
 }
 
+/* Individual keys */
 .key {
-    width: 40px; /* Fixed width for consistency */
-    height: 40px; /* Fixed height */
+    width: 50px; /* Slightly larger than before for usability */
+    height: 50px; /* Matching height */
     margin: 5px; /* Space between keys */
-    font-size: 16px; /* Readable text */
+    font-size: 18px; /* Slightly larger text */
     cursor: pointer; /* Hand cursor on hover */
     display: flex; /* Center text in key */
     align-items: center; /* Vertical centering */
     justify-content: center; /* Horizontal centering */
-    background: #f0f0f0; /* Light background */
+    background: #e0e0e0; /* Light gray background */
     border: 1px solid #999; /* Border for definition */
     border-radius: 5px; /* Rounded corners */
+}
+
+.key:hover {
+    background: #d0d0d0; /* Darker gray on hover */
 }
