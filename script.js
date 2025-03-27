@@ -6,6 +6,7 @@ let mixedCorrect = 0;
 let streak = 0;
 const streakThreshold = 5;
 let activeStage = 'one-step';
+let currentUser = null;
 
 const levels = [
     { name: "1 (Positive Answers)", problems: {
@@ -142,7 +143,9 @@ function updateProgress() {
     document.getElementById('multi-step-progress').textContent = twoStepCorrect >= streakThreshold ? `${multiStepCorrect}/${streakThreshold}` : 'Locked';
     document.getElementById('mixed-progress').textContent = multiStepCorrect >= streakThreshold ? `${mixedCorrect}/${streakThreshold}` : 'Locked';
     document.getElementById('streak').textContent = `${streak}/${streakThreshold}`;
+    document.getElementById('current-user').textContent = currentUser ? `User: ${currentUser}` : 'No user selected';
     setActiveStage();
+    saveUserProgress(); // Auto-save after progress updates
 }
 
 function setActiveStage() {
@@ -178,51 +181,58 @@ function changeLevel() {
     updateProgress();
 }
 
-function saveSession() {
-    const session = { currentLevel, oneStepCorrect, twoStepCorrect, multiStepCorrect, mixedCorrect, streak, activeStage };
-    localStorage.setItem('equationHelperSession', JSON.stringify(session));
-    alert('Session saved!');
+function saveUserProgress() {
+    if (!currentUser) return;
+    const progress = { currentLevel, oneStepCorrect, twoStepCorrect, multiStepCorrect, mixedCorrect, streak, activeStage };
+    localStorage.setItem(`equationHelper_${currentUser}`, JSON.stringify(progress));
+    console.log(`Saved progress for ${currentUser}`);
 }
 
-function loadSession() {
-    const savedSession = localStorage.getItem('equationHelperSession');
-    if (savedSession) {
-        const session = JSON.parse(savedSession);
-        currentLevel = session.currentLevel;
-        oneStepCorrect = session.oneStepCorrect;
-        twoStepCorrect = session.twoStepCorrect;
-        multiStepCorrect = session.multiStepCorrect;
-        mixedCorrect = session.mixedCorrect;
-        streak = session.streak;
-        activeStage = session.activeStage;
+function loadUserProgress() {
+    if (!currentUser) return;
+    const savedProgress = localStorage.getItem(`equationHelper_${currentUser}`);
+    if (savedProgress) {
+        const progress = JSON.parse(savedProgress);
+        currentLevel = progress.currentLevel;
+        oneStepCorrect = progress.oneStepCorrect;
+        twoStepCorrect = progress.twoStepCorrect;
+        multiStepCorrect = progress.multiStepCorrect;
+        mixedCorrect = progress.mixedCorrect;
+        streak = progress.streak;
+        activeStage = progress.activeStage;
         loadOneStepProblem();
         loadTwoStepProblem();
         loadMultiStepProblem();
         loadMixedProblem();
         updateProgress();
-        alert('Session loaded!');
+        console.log(`Loaded progress for ${currentUser}`);
     } else {
-        alert('No saved session found.');
+        resetGame(); // New user starts fresh
     }
 }
 
-function loadSessionSilently() {
-    const savedSession = localStorage.getItem('equationHelperSession');
-    if (savedSession) {
-        const session = JSON.parse(savedSession);
-        currentLevel = session.currentLevel;
-        oneStepCorrect = session.oneStepCorrect;
-        twoStepCorrect = session.twoStepCorrect;
-        multiStepCorrect = session.multiStepCorrect;
-        mixedCorrect = session.mixedCorrect;
-        streak = session.streak;
-        activeStage = session.activeStage;
-        loadOneStepProblem();
-        loadTwoStepProblem();
-        loadMultiStepProblem();
-        loadMixedProblem();
-        updateProgress();
+function promptForUsername() {
+    let username = localStorage.getItem('lastUser');
+    if (!username) {
+        username = prompt('Enter your username:');
+        if (username) {
+            currentUser = username.trim();
+            localStorage.setItem('lastUser', currentUser);
+            loadUserProgress();
+        } else {
+            alert('Please enter a valid username to start.');
+            promptForUsername();
+        }
+    } else {
+        currentUser = username;
+        loadUserProgress();
     }
+}
+
+function switchUser() {
+    localStorage.removeItem('lastUser');
+    currentUser = null;
+    promptForUsername();
 }
 
 function loadOneStepProblem() {
@@ -463,12 +473,12 @@ function checkMixed() {
 
 function initialize() {
     console.log('Initializing game...');
+    promptForUsername();
     loadOneStepProblem();
     loadTwoStepProblem();
     loadMultiStepProblem();
     loadMixedProblem();
     updateProgress();
-    loadSessionSilently(); // Load saved session if exists
 }
 
 let activeInput = null;
@@ -503,8 +513,9 @@ function handleKeyPress(value) {
 
 document.addEventListener('DOMContentLoaded', () => {
     initialize();
-    document.getElementById('save-session').addEventListener('click', saveSession);
-    document.getElementById('load-session').addEventListener('click', loadSession);
+    document.getElementById('save-session').addEventListener('click', () => saveUserProgress());
+    document.getElementById('load-session').addEventListener('click', () => loadUserProgress());
+    document.getElementById('switch-user').addEventListener('click', switchUser);
     document.querySelectorAll('input[type="text"]').forEach(input => {
         input.addEventListener('click', () => showKeyboard(input));
     });
