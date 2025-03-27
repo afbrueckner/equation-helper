@@ -73,7 +73,7 @@ button:hover {
 /* Custom keyboard styling */
 #custom-keyboard {
     display: none; /* Hidden by default */
-    position: fixed; /* Fixed to stay at bottom */
+    position: fixed; /* Fixed to bottom */
     bottom: 10px; /* 10px from bottom */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Offset by half its width */
@@ -83,6 +83,7 @@ button:hover {
     border: 1px solid #ccc; /* Border for visibility */
     display: flex; /* Horizontal layout */
     flex-direction: row; /* Explicitly horizontal */
+    flex-wrap: nowrap; /* Prevent wrapping to keep it in one row */
     justify-content: center; /* Center keys within keyboard */
     max-width: 90vw; /* Limit width on small screens */
     overflow-x: auto; /* Scroll horizontally if too wide */
@@ -90,19 +91,20 @@ button:hover {
 
 /* Individual keys */
 .key {
-    width: 50px; /* Slightly larger than before for usability */
+    width: 50px; /* Consistent size */
     height: 50px; /* Matching height */
     margin: 5px; /* Space between keys */
-    font-size: 18px; /* Slightly larger text */
+    font-size: 18px; /* Readable text */
     cursor: pointer; /* Hand cursor on hover */
     display: flex; /* Center text in key */
     align-items: center; /* Vertical centering */
     justify-content: center; /* Horizontal centering */
-    background: #e0e0e0; /* Light gray background */
-    border: 1px solid #999; /* Border for definition */
+    background: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: 1px solid #388E3C; /* Darker green border */
     border-radius: 5px; /* Rounded corners */
 }
 
 .key:hover {
-    background: #d0d0d0; /* Darker gray on hover */
+    background: #45a049; /* Slightly darker green on hover */
 }
