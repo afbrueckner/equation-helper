@@ -29,12 +29,13 @@ header {
     width: 90%;
     max-width: 800px;
     margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fff;
+    padding: 20px; /* Slightly more padding for breathing room */
+    background-color: #f0f8ff; /* Light blue background (AliceBlue) */
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
     display: none; /* Hidden by default */
+    text-align: center; /* Center all text inside by default */
 }
 
 /* Active stage visibility */
@@ -42,6 +43,13 @@ header {
     display: block; /* Show only the active stage */
     border-color: #4CAF50;
     box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Stage titles */
+.stage h2 {
+    color: #00695c; /* Teal color for titles */
+    font-size: 24px;
+    margin: 0 0 15px 0; /* Space below title */
 }
 
 /* Equation and hint text */
@@ -58,6 +66,8 @@ input[type="text"] {
     font-size: 16px;
     margin: 5px auto;
     display: block;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 /* Buttons */
@@ -70,6 +80,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     margin: 5px;
+    transition: background-color 0.3s; /* Smooth hover effect */
 }
 
 button:hover {
@@ -90,6 +101,10 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
     margin: 10px 0;
     font-size: 16px;
     text-align: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 /* Level and user select dropdowns */
@@ -97,6 +112,8 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
     padding: 5px;
     font-size: 14px;
     margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 /* Custom keyboard styling */
@@ -138,6 +155,7 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
     color: white;
     border: 1px solid #388E3C;
     border-radius: 5px;
+    transition: background-color 0.3s; /* Smooth hover effect */
 }
 
 .key:hover {
