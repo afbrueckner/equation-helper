@@ -3,8 +3,8 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Fun, kid-friendly font with fallback */
-    background-color: #ffffff; /* White background for clarity */
+    font-family: 'Comic Sans MS', 'Arial', sans-serif;
+    background-color: #ffffff;
 }
 
 /* Center the main content */
@@ -20,25 +20,25 @@ body {
 header {
     width: 90%;
     max-width: 800px;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduced slightly to pull content up */
     text-align: center;
 }
 
 header h1 {
-    color: #0288d1; /* Bright blue for the app title */
-    font-size: 32px; /* Bigger for impact */
+    color: #0288d1;
+    font-size: 32px;
     margin: 0;
 }
 
-/* Container for stages */
+/* Container for stages (equation boxes) */
 .stage {
     width: 90%;
-    max-width: 800px;
+    max-width: 800px; /* Kept large to emphasize focus */
     margin-bottom: 20px;
     padding: 20px;
-    background-color: #e0f7fa; /* Light cyan for vibrance */
-    border: 2px solid #0288d1; /* Bold blue border */
-    border-radius: 8px; /* Slightly larger radius for softness */
+    background-color: #e0f7fa;
+    border: 2px solid #0288d1;
+    border-radius: 8px;
     box-sizing: border-box;
     display: none;
     text-align: center;
@@ -47,56 +47,56 @@ header h1 {
 /* Active stage visibility */
 .stage.active {
     display: block;
-    border-color: #ff5722; /* Orange for active stage */
-    box-shadow: 0 0 8px rgba(255, 87, 34, 0.5); /* Vibrant shadow */
+    border-color: #ff5722;
+    box-shadow: 0 0 8px rgba(255, 87, 34, 0.5);
 }
 
 /* Stage titles */
 .stage h2 {
-    color: #0288d1; /* Bright blue for titles */
-    font-size: 28px; /* Bold and larger */
+    color: #0288d1;
+    font-size: 28px;
     margin: 0 0 15px 0;
 }
 
 /* Equation and hint text */
 .equation, p[id$="-hint"], p[id$="-hint1"], p[id$="-hint2"], p[id$="-hint3"] {
-    font-size: 20px; /* Slightly bigger for readability */
+    font-size: 20px;
     margin: 12px 0;
     text-align: center;
-    color: #333; /* Dark gray for contrast */
+    color: #333;
 }
 
 /* Input fields */
 input[type="text"] {
-    width: 120px; /* Wider for ease of use */
+    width: 120px;
     padding: 8px;
     font-size: 18px;
     margin: 8px auto;
     display: block;
-    border: 2px solid #0288d1; /* Blue border */
+    border: 2px solid #0288d1;
     border-radius: 5px;
     background-color: #fff;
 }
 
 /* Buttons */
 button {
-    padding: 10px 20px; /* Larger for boldness */
+    padding: 10px 20px;
     font-size: 16px;
-    background-color: #ff5722; /* Vibrant orange */
+    background-color: #ff5722;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     margin: 8px;
-    transition: background-color 0.3s, transform 0.1s; /* Hover and click effects */
+    transition: background-color 0.3s, transform 0.1s;
 }
 
 button:hover {
-    background-color: #e64a19; /* Darker orange */
+    background-color: #e64a19;
 }
 
 button:active {
-    transform: scale(0.95); /* Slight press effect */
+    transform: scale(0.95);
 }
 
 /* Feedback text */
@@ -106,23 +106,36 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
     text-align: center;
 }
 
-/* Progress and user info */
-#progress, #user-info {
-    width: 90%;
-    max-width: 800px;
+/* Progress box */
+#progress {
+    width: 80%; /* Smaller width */
+    max-width: 400px; /* Half the size of .stage for less dominance */
     margin: 10px 0;
-    font-size: 18px;
+    font-size: 16px; /* Slightly smaller text */
     text-align: center;
-    padding: 15px;
+    padding: 10px; /* Reduced padding */
     background-color: #fff;
-    border: 2px solid #0288d1; /* Blue border */
+    border: 2px solid #0288d1;
     border-radius: 8px;
 }
 
 #progress h2 {
-    color: #0288d1; /* Blue for progress title */
-    font-size: 24px;
-    margin: 0 0 10px 0;
+    color: #0288d1;
+    font-size: 20px; /* Smaller title */
+    margin: 0 0 8px 0;
+}
+
+/* User info */
+#user-info {
+    width: 80%;
+    max-width: 400px; /* Match progress for consistency */
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #0288d1;
+    border-radius: 8px;
 }
 
 /* Level and user select dropdowns */
@@ -162,17 +175,17 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
 
 /* Individual keys */
 .key {
-    width: 55px; /* Slightly larger */
+    width: 55px;
     height: 55px;
     margin: 5px;
-    font-size: 20px; /* Bigger for readability */
+    font-size: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ff5722; /* Orange to match buttons */
+    background: #ff5722;
     color: white;
-    border: 2px solid #e64a19; /* Darker orange border */
+    border: 2px solid #e64a19;
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.1s;
 }
