@@ -19,81 +19,80 @@
         <button id="load-session">Load Session</button>
         <button onclick="resetGame()">Reset</button>
     </header>
-    <div id="top-section">
-        <div id="user-info">
-            <span id="current-user">User: None</span>
-            <select id="user-select">
-                <option value="">Select User</option>
-                <!-- Options populated dynamically -->
-            </select>
+    <main>
+        <div id="top-section">
+            <div id="user-info">
+                <span id="current-user">User: None</span>
+                <select id="user-select">
+                    <option value="">Select User</option>
+                </select>
+            </div>
+            <div id="progress">
+                <h2>Progress</h2>
+                <p>One-Step: <span id="one-step-progress">0/5</span></p>
+                <p>Two-Step: <span id="two-step-progress">Locked</span></p>
+                <p>Multi-Step: <span id="multi-step-progress">Locked</span></p>
+                <p>Mixed: <span id="mixed-progress">Locked</span></p>
+                <p>Streak: <span id="streak">0/5</span></p>
+            </div>
         </div>
-        <div id="progress">
-            <h2>Progress</h2>
-            <p>One-Step: <span id="one-step-progress">0/5</span></p>
-            <p>Two-Step: <span id="two-step-progress">Locked</span></p>
-            <p>Multi-Step: <span id="multi-step-progress">Locked</span></p>
-            <p>Mixed: <span id="mixed-progress">Locked</span></p>
-            <p>Streak: <span id="streak">0/5</span></p>
+        <div id="one-step" class="stage active">
+            <h2>One-Step Equations</h2>
+            <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
+            <p id="one-step-eq"></p>
+            <p id="one-step-hint"></p>
+            <input type="text" id="one-step-input" placeholder="Enter your answer" onfocus="this.blur()">
+            <button onclick="checkOneStep()">Check</button>
+            <p id="one-step-feedback"></p>
         </div>
-    </div>
-    <div id="one-step" class="stage active">
-        <h2>One-Step Equations</h2>
-        <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
-        <p id="one-step-eq"></p>
-        <p id="one-step-hint"></p>
-        <input type="text" id="one-step-input" placeholder="Enter your answer" onfocus="this.blur()">
-        <button onclick="checkOneStep()">Check</button>
-        <p id="one-step-feedback"></p>
-    </div>
-    <div id="two-step" class="stage">
-        <h2>Two-Step Equations</h2>
-        <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
-        <p id="two-step-eq"></p>
-        <p id="two-step-hint1"></p>
-        <input type="text" id="two-step-input1" placeholder="Step 1 answer" onfocus="this.blur()">
-        <button onclick="checkTwoStep1()">Check</button>
-        <p id="two-step-feedback1"></p>
-        <div id="two-step-step2" style="display: none;">
-            <p id="two-step-eq2"></p>
-            <p id="two-step-hint2"></p>
-            <input type="text" id="two-step-input2" placeholder="Step 2 answer" onfocus="this.blur()">
-            <button onclick="checkTwoStep2()">Check</button>
-            <p id="two-step-feedback2"></p>
+        <div id="two-step" class="stage">
+            <h2>Two-Step Equations</h2>
+            <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
+            <p id="two-step-eq"></p>
+            <p id="two-step-hint1"></p>
+            <input type="text" id="two-step-input1" placeholder="Step 1 answer" onfocus="this.blur()">
+            <button onclick="checkTwoStep1()">Check</button>
+            <p id="two-step-feedback1"></p>
+            <div id="two-step-step2" style="display: none;">
+                <p id="two-step-eq2"></p>
+                <p id="two-step-hint2"></p>
+                <input type="text" id="two-step-input2" placeholder="Step 2 answer" onfocus="this.blur()">
+                <button onclick="checkTwoStep2()">Check</button>
+                <p id="two-step-feedback2"></p>
+            </div>
         </div>
-    </div>
-    <div id="multi-step" class="stage">
-        <h2>Multi-Step Equations</h2>
-        <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
-        <p id="multi-step-eq"></p>
-        <p id="multi-step-hint1"></p>
-        <input type="text" id="multi-step-input1" placeholder="Step 1 answer" onfocus="this.blur()">
-        <button onclick="checkMultiStep1()">Check</button>
-        <p id="multi-step-feedback1"></p>
-        <div id="multi-step-step2" style="display: none;">
-            <p id="multi-step-eq2"></p>
-            <p id="multi-step-hint2"></p>
-            <input type="text" id="multi-step-input2" placeholder="Step 2 answer" onfocus="this.blur()">
-            <button onclick="checkMultiStep2()">Check</button>
-            <p id="multi-step-feedback2"></p>
+        <div id="multi-step" class="stage">
+            <h2>Multi-Step Equations</h2>
+            <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
+            <p id="multi-step-eq"></p>
+            <p id="multi-step-hint1"></p>
+            <input type="text" id="multi-step-input1" placeholder="Step 1 answer" onfocus="this.blur()">
+            <button onclick="checkMultiStep1()">Check</button>
+            <p id="multi-step-feedback1"></p>
+            <div id="multi-step-step2" style="display: none;">
+                <p id="multi-step-eq2"></p>
+                <p id="multi-step-hint2"></p>
+                <input type="text" id="multi-step-input2" placeholder="Step 2 answer" onfocus="this.blur()">
+                <button onclick="checkMultiStep2()">Check</button>
+                <p id="multi-step-feedback2"></p>
+            </div>
+            <div id="multi-step-step3" style="display: none;">
+                <p id="multi-step-eq3"></p>
+                <p id="multi-step-hint3"></p>
+                <input type="text" id="multi-step-input3" placeholder="Step 3 answer" onfocus="this.blur()">
+                <button onclick="checkMultiStep3()">Check</button>
+                <p id="multi-step-feedback3"></p>
+            </div>
         </div>
-        <div id="multi-step-step3" style="display: none;">
-            <p id="multi-step-eq3"></p>
-            <p id="multi-step-hint3"></p>
-            <input type="text" id="multi-step-input3" placeholder="Step 3 answer" onfocus="this.blur()">
-            <button onclick="checkMultiStep3()">Check</button>
-            <p id="multi-step-feedback3"></p>
+        <div id="mixed" class="stage">
+            <h2>Mixed Equations</h2>
+            <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
+            <p id="mixed-eq"></p>
+            <input type="text" id="mixed-input" placeholder="Enter your answer" onfocus="this.blur()">
+            <button onclick="checkMixed()">Check</button>
+            <p id="mixed-feedback"></p>
         </div>
-    </div>
-    <div id="mixed" class="stage">
-        <h2>Mixed Equations</h2>
-        <p class="equation"><span class="left-side"></span>=<span class="right-side"></span></p>
-        <p id="mixed-eq"></p>
-        <input type="text" id="mixed-input" placeholder="Enter your answer" onfocus="this.blur()">
-        <button onclick="checkMixed()">Check</button>
-        <p id="mixed-feedback"></p>
-    </div>
-
-    <!-- Custom Keyboard (Single Row Landscape) -->
+    </main>
     <div id="custom-keyboard" style="display: none;">
         <div class="keyboard-row">
             <button class="key" data-value="0">0</button>
@@ -115,7 +114,6 @@
             <button class="key enter-key" data-value="enter">Enter</button>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
