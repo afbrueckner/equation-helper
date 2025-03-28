@@ -20,20 +20,61 @@ body {
 header {
     width: 90%;
     max-width: 800px;
-    margin-bottom: 15px; /* Reduced slightly to pull content up */
+    margin-bottom: 15px;
     text-align: center;
 }
 
 header h1 {
     color: #0288d1;
     font-size: 32px;
-    margin: 0;
+    margin: 0 0 10px 0; /* Added bottom margin for spacing */
+}
+
+/* Top section container for progress and user-info */
+#top-section {
+    display: flex;
+    justify-content: center; /* Center the children horizontally */
+    align-items: flex-start; /* Align tops of children */
+    width: 90%;
+    max-width: 800px;
+    margin: 0 0 15px 0; /* Reduced vertical space */
+    gap: 20px; /* Space between progress and user-info */
+}
+
+/* Progress box */
+#progress {
+    width: 50%; /* Half of the container */
+    max-width: 250px; /* Compact size */
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #0288d1;
+    border-radius: 8px;
+}
+
+#progress h2 {
+    color: #0288d1;
+    font-size: 18px;
+    margin: 0 0 6px 0;
+}
+
+/* User info */
+#user-info {
+    width: 50%;
+    max-width: 250px;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #0288d1;
+    border-radius: 8px;
 }
 
 /* Container for stages (equation boxes) */
 .stage {
     width: 90%;
-    max-width: 800px; /* Kept large to emphasize focus */
+    max-width: 800px;
     margin-bottom: 20px;
     padding: 20px;
     background-color: #e0f7fa;
@@ -104,38 +145,6 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
     font-size: 18px;
     margin: 8px 0;
     text-align: center;
-}
-
-/* Progress box */
-#progress {
-    width: 80%; /* Smaller width */
-    max-width: 400px; /* Half the size of .stage for less dominance */
-    margin: 10px 0;
-    font-size: 16px; /* Slightly smaller text */
-    text-align: center;
-    padding: 10px; /* Reduced padding */
-    background-color: #fff;
-    border: 2px solid #0288d1;
-    border-radius: 8px;
-}
-
-#progress h2 {
-    color: #0288d1;
-    font-size: 20px; /* Smaller title */
-    margin: 0 0 8px 0;
-}
-
-/* User info */
-#user-info {
-    width: 80%;
-    max-width: 400px; /* Match progress for consistency */
-    margin: 10px 0;
-    font-size: 16px;
-    text-align: center;
-    padding: 10px;
-    background-color: #fff;
-    border: 2px solid #0288d1;
-    border-radius: 8px;
 }
 
 /* Level and user select dropdowns */
