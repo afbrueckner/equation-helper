@@ -34,18 +34,18 @@ header h1 {
 main {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align tops of children */
+    align-items: flex-start;
     width: 90%;
-    max-width: 1200px; /* Wider to accommodate side-by-side */
-    gap: 20px; /* Space between top-section and stage */
-    flex-wrap: wrap; /* Wrap on smaller screens */
+    max-width: 1200px;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 /* Top section container for progress and user-info */
 #top-section {
     display: flex;
-    flex-direction: column; /* Stack user-info and progress vertically within this section */
-    width: 30%; /* Takes up less width */
+    flex-direction: column;
+    width: 30%;
     max-width: 300px;
     background-color: #fff;
     border: 2px solid #0288d1;
@@ -74,7 +74,7 @@ main {
 
 /* Container for stages (equation boxes) */
 .stage {
-    width: 60%; /* Larger portion for focus */
+    width: 60%;
     max-width: 800px;
     margin-bottom: 15px;
     padding: 20px;
@@ -167,10 +167,10 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
     transform: translateX(-50%);
     z-index: 1000;
     background: #fff;
-    padding: 15px;
+    padding: 10px; /* Reduced padding slightly */
     border: 2px solid #0288d1;
     border-radius: 8px;
-    max-width: 90vw;
+    max-width: 90vw; /* Keeps it within 90% of viewport */
     overflow-x: auto;
 }
 
@@ -178,17 +178,23 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
 .keyboard-row {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; /* Keep single row for now */
     justify-content: center;
     align-items: center;
 }
 
 /* Individual keys */
 .key {
-    width: 55px;
-    height: 55px;
-    margin: 5px;
-    font-size: 20px;
+    width: calc(5vw + 10px); /* Dynamic width: 5% of viewport + 10px base */
+    height: calc(5vw + 10px); /* Match height to width */
+    min-width: 30px; /* Minimum size for usability */
+    min-height: 30px;
+    max-width: 55px; /* Cap for larger screens */
+    max-height: 55px;
+    margin: 3px; /* Reduced margin for tighter fit */
+    font-size: calc(1.5vw + 8px); /* Dynamic font size */
+    min-font-size: 14px; /* Minimum for readability */
+    max-font-size: 20px; /* Cap to match original */
     cursor: pointer;
     display: flex;
     align-items: center;
