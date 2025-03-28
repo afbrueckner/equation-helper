@@ -12,7 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px; /* Reduced from 20px to pull everything up */
+    padding: 10px;
     box-sizing: border-box;
 }
 
@@ -20,62 +20,63 @@ body {
 header {
     width: 90%;
     max-width: 800px;
-    margin-bottom: 10px; /* Reduced from 15px */
+    margin-bottom: 10px;
     text-align: center;
 }
 
 header h1 {
     color: #0288d1;
-    font-size: 28px; /* Slightly smaller to save space */
-    margin: 0 0 5px 0; /* Tighter margin */
+    font-size: 28px;
+    margin: 0 0 5px 0;
+}
+
+/* Main content area */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align tops of children */
+    width: 90%;
+    max-width: 1200px; /* Wider to accommodate side-by-side */
+    gap: 20px; /* Space between top-section and stage */
+    flex-wrap: wrap; /* Wrap on smaller screens */
 }
 
 /* Top section container for progress and user-info */
 #top-section {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    width: 90%;
-    max-width: 800px;
-    margin: 0 0 10px 0; /* Reduced from 15px */
-    gap: 15px; /* Tightened from 20px */
+    flex-direction: column; /* Stack user-info and progress vertically within this section */
+    width: 30%; /* Takes up less width */
+    max-width: 300px;
+    background-color: #fff;
+    border: 2px solid #0288d1;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
 }
 
 /* Progress box */
 #progress {
-    width: 50%;
-    max-width: 220px; /* Slightly smaller for compactness */
-    font-size: 13px; /* Smaller text */
-    text-align: center;
-    padding: 8px; /* Reduced from 10px */
-    background-color: #fff;
-    border: 2px solid #0288d1;
-    border-radius: 8px;
+    font-size: 13px;
+    padding: 5px 0;
 }
 
 #progress h2 {
     color: #0288d1;
-    font-size: 16px; /* Smaller title */
-    margin: 0 0 4px 0; /* Tighter margin */
+    font-size: 16px;
+    margin: 0 0 4px 0;
 }
 
 /* User info */
 #user-info {
-    width: 50%;
-    max-width: 220px;
     font-size: 13px;
-    text-align: center;
-    padding: 8px;
-    background-color: #fff;
-    border: 2px solid #0288d1;
-    border-radius: 8px;
+    padding: 5px 0;
 }
 
 /* Container for stages (equation boxes) */
 .stage {
-    width: 90%;
+    width: 60%; /* Larger portion for focus */
     max-width: 800px;
-    margin-bottom: 15px; /* Reduced from 20px */
+    margin-bottom: 15px;
     padding: 20px;
     background-color: #e0f7fa;
     border: 2px solid #0288d1;
@@ -150,7 +151,7 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
 /* Level and user select dropdowns */
 #level-select, #user-select {
     padding: 8px;
-    font-size: 14px; /* Slightly smaller */
+    font-size: 14px;
     margin-left: 10px;
     border: 2px solid #0288d1;
     border-radius: 5px;
