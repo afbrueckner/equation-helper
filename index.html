@@ -9,13 +9,6 @@
 <body>
     <header>
         <h1>Equation Helper</h1>
-        <div id="user-info">
-  <span id="current-user">User: None</span>
-  <select id="user-select">
-    <option value="">Select User</option>
-    <!-- Options populated dynamically -->
-  </select>
-</div>
         <select id="level-select" onchange="changeLevel()">
             <option value="1">1 (Positive Answers)</option>
             <option value="2">2 (Negative Answers)</option>
@@ -26,13 +19,22 @@
         <button id="load-session">Load Session</button>
         <button onclick="resetGame()">Reset</button>
     </header>
-    <div id="progress">
-        <h2>Progress</h2>
-        <p>One-Step: <span id="one-step-progress">0/5</span></p>
-        <p>Two-Step: <span id="two-step-progress">Locked</span></p>
-        <p>Multi-Step: <span id="multi-step-progress">Locked</span></p>
-        <p>Mixed: <span id="mixed-progress">Locked</span></p>
-        <p>Streak: <span id="streak">0/5</span></p>
+    <div id="top-section">
+        <div id="user-info">
+            <span id="current-user">User: None</span>
+            <select id="user-select">
+                <option value="">Select User</option>
+                <!-- Options populated dynamically -->
+            </select>
+        </div>
+        <div id="progress">
+            <h2>Progress</h2>
+            <p>One-Step: <span id="one-step-progress">0/5</span></p>
+            <p>Two-Step: <span id="two-step-progress">Locked</span></p>
+            <p>Multi-Step: <span id="multi-step-progress">Locked</span></p>
+            <p>Mixed: <span id="mixed-progress">Locked</span></p>
+            <p>Streak: <span id="streak">0/5</span></p>
+        </div>
     </div>
     <div id="one-step" class="stage active">
         <h2>One-Step Equations</h2>
