@@ -12,7 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 10px; /* Reduced from 20px to pull everything up */
     box-sizing: border-box;
 }
 
@@ -20,34 +20,34 @@ body {
 header {
     width: 90%;
     max-width: 800px;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Reduced from 15px */
     text-align: center;
 }
 
 header h1 {
     color: #0288d1;
-    font-size: 32px;
-    margin: 0 0 10px 0; /* Added bottom margin for spacing */
+    font-size: 28px; /* Slightly smaller to save space */
+    margin: 0 0 5px 0; /* Tighter margin */
 }
 
 /* Top section container for progress and user-info */
 #top-section {
     display: flex;
-    justify-content: center; /* Center the children horizontally */
-    align-items: flex-start; /* Align tops of children */
+    justify-content: center;
+    align-items: flex-start;
     width: 90%;
     max-width: 800px;
-    margin: 0 0 15px 0; /* Reduced vertical space */
-    gap: 20px; /* Space between progress and user-info */
+    margin: 0 0 10px 0; /* Reduced from 15px */
+    gap: 15px; /* Tightened from 20px */
 }
 
 /* Progress box */
 #progress {
-    width: 50%; /* Half of the container */
-    max-width: 250px; /* Compact size */
-    font-size: 14px;
+    width: 50%;
+    max-width: 220px; /* Slightly smaller for compactness */
+    font-size: 13px; /* Smaller text */
     text-align: center;
-    padding: 10px;
+    padding: 8px; /* Reduced from 10px */
     background-color: #fff;
     border: 2px solid #0288d1;
     border-radius: 8px;
@@ -55,17 +55,17 @@ header h1 {
 
 #progress h2 {
     color: #0288d1;
-    font-size: 18px;
-    margin: 0 0 6px 0;
+    font-size: 16px; /* Smaller title */
+    margin: 0 0 4px 0; /* Tighter margin */
 }
 
 /* User info */
 #user-info {
     width: 50%;
-    max-width: 250px;
-    font-size: 14px;
+    max-width: 220px;
+    font-size: 13px;
     text-align: center;
-    padding: 10px;
+    padding: 8px;
     background-color: #fff;
     border: 2px solid #0288d1;
     border-radius: 8px;
@@ -75,7 +75,7 @@ header h1 {
 .stage {
     width: 90%;
     max-width: 800px;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduced from 20px */
     padding: 20px;
     background-color: #e0f7fa;
     border: 2px solid #0288d1;
@@ -150,7 +150,7 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
 /* Level and user select dropdowns */
 #level-select, #user-select {
     padding: 8px;
-    font-size: 16px;
+    font-size: 14px; /* Slightly smaller */
     margin-left: 10px;
     border: 2px solid #0288d1;
     border-radius: 5px;
