@@ -167,10 +167,10 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
     transform: translateX(-50%);
     z-index: 1000;
     background: #fff;
-    padding: 10px; /* Reduced padding slightly */
+    padding: 10px;
     border: 2px solid #0288d1;
     border-radius: 8px;
-    max-width: 90vw; /* Keeps it within 90% of viewport */
+    max-width: 90vw;
     overflow-x: auto;
 }
 
@@ -178,23 +178,18 @@ p[id$="-feedback"], p[id$="-feedback1"], p[id$="-feedback2"], p[id$="-feedback3"
 .keyboard-row {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap; /* Keep single row for now */
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    margin: 5px 0; /* Space between rows */
 }
 
 /* Individual keys */
 .key {
-    width: calc(5vw + 10px); /* Dynamic width: 5% of viewport + 10px base */
-    height: calc(5vw + 10px); /* Match height to width */
-    min-width: 30px; /* Minimum size for usability */
-    min-height: 30px;
-    max-width: 55px; /* Cap for larger screens */
-    max-height: 55px;
-    margin: 3px; /* Reduced margin for tighter fit */
-    font-size: calc(1.5vw + 8px); /* Dynamic font size */
-    min-font-size: 14px; /* Minimum for readability */
-    max-font-size: 20px; /* Cap to match original */
+    width: 55px; /* Back to fixed size */
+    height: 55px;
+    margin: 5px;
+    font-size: 20px; /* Original size */
     cursor: pointer;
     display: flex;
     align-items: center;
