@@ -14,7 +14,6 @@
                 { "eq": "4x=12", "answer": "x=3", "hint": "Divide both sides by 4." },
                 { "eq": "x+7=13", "answer": "x=6", "hint": "Subtract 7 from both sides." }
                 { "eq": "x+1=5", "answer": "x=4", "hint": "Subtract 1 from both sides." }
-
             ],
             "twoStep": [
                 { "eq": "2x+4=10", "step1": "2x=6", "step2": "x=3", "hint1": "Subtract 4 from both sides.", "hint2": "Divide both sides by 2." },
