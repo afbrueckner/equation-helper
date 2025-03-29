@@ -7,132 +7,8 @@ let streak = 0;
 const streakThreshold = 5;
 let activeStage = 'one-step';
 let currentUser = null;
-
-const levels = [
-    { name: "1 (Positive Answers)", problems: {
-        oneStep: [
-            { eq: "x+4=10", answer: "x=6", hint: "Subtract 4 from both sides." },
-            { eq: "x-3=7", answer: "x=10", hint: "Add 3 to both sides." },
-            { eq: "2x=8", answer: "x=4", hint: "Divide both sides by 2." },
-            { eq: "x+5=12", answer: "x=7", hint: "Subtract 5 from both sides." },
-            { eq: "x-6=4", answer: "x=10", hint: "Add 6 to both sides." },
-            { eq: "3x=15", answer: "x=5", hint: "Divide both sides by 3." },
-            { eq: "x+2=9", answer: "x=7", hint: "Subtract 2 from both sides." },
-            { eq: "x-8=2", answer: "x=10", hint: "Add 8 to both sides." },
-            { eq: "4x=12", answer: "x=3", hint: "Divide both sides by 4." },
-            { eq: "x+7=13", answer: "x=6", hint: "Subtract 7 from both sides." }
-        ],
-        twoStep: [
-            { eq: "2x+4=10", step1: "2x=6", step2: "x=3", hint1: "Subtract 4 from both sides.", hint2: "Divide both sides by 2." },
-            { eq: "3x-4=8", step1: "3x=12", step2: "x=4", hint1: "Add 4 to both sides.", hint2: "Divide both sides by 3." },
-            { eq: "5x+2=17", step1: "5x=15", step2: "x=3", hint1: "Subtract 2 from both sides.", hint2: "Divide both sides by 5." },
-            { eq: "4x-6=10", step1: "4x=16", step2: "x=4", hint1: "Add 6 to both sides.", hint2: "Divide both sides by 4." },
-            { eq: "2x+5=11", step1: "2x=6", step2: "x=3", hint1: "Subtract 5 from both sides.", hint2: "Divide both sides by 2." },
-            { eq: "3x-7=5", step1: "3x=12", step2: "x=4", hint1: "Add 7 to both sides.", hint2: "Divide both sides by 3." },
-            { eq: "6x+3=15", step1: "6x=12", step2: "x=2", hint1: "Subtract 3 from both sides.", hint2: "Divide both sides by 6." },
-            { eq: "5x-8=7", step1: "5x=15", step2: "x=3", hint1: "Add 8 to both sides.", hint2: "Divide both sides by 5." },
-            { eq: "4x+1=13", step1: "4x=12", step2: "x=3", hint1: "Subtract 1 from both sides.", hint2: "Divide both sides by 4." },
-            { eq: "2x-3=7", step1: "2x=10", step2: "x=5", hint1: "Add 3 to both sides.", hint2: "Divide both sides by 2." }
-        ],
-        multiStep: [
-            { eq: "2x+3=5x-6", step1: "3=3x-6", step2: "9=3x", step3: "x=3", hint1: "Subtract 2x from both sides.", hint2: "Add 6 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "4x-5=2x+7", step1: "2x-5=7", step2: "2x=12", step3: "x=6", hint1: "Subtract 2x from both sides.", hint2: "Add 5 to both sides.", hint3: "Divide both sides by 2." },
-            { eq: "3x+4=6x-2", step1: "4=3x-2", step2: "6=3x", step3: "x=2", hint1: "Subtract 3x from both sides.", hint2: "Add 2 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "5x-1=2x+8", step1: "3x-1=8", step2: "3x=9", step3: "x=3", hint1: "Subtract 2x from both sides.", hint2: "Add 1 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "7x+2=4x+11", step1: "3x+2=11", step2: "3x=9", step3: "x=3", hint1: "Subtract 4x from both sides.", hint2: "Subtract 2 from both sides.", hint3: "Divide both sides by 3." },
-            { eq: "2x-6=5x-15", step1: "-6=3x-15", step2: "9=3x", step3: "x=3", hint1: "Subtract 2x from both sides.", hint2: "Add 15 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "6x+1=3x+10", step1: "3x+1=10", step2: "3x=9", step3: "x=3", hint1: "Subtract 3x from both sides.", hint2: "Subtract 1 from both sides.", hint3: "Divide both sides by 3." },
-            { eq: "4x-3=7x-12", step1: "-3=3x-12", step2: "9=3x", step3: "x=3", hint1: "Subtract 4x from both sides.", hint2: "Add 12 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "5x+4=2x+13", step1: "3x+4=13", step2: "3x=9", step3: "x=3", hint1: "Subtract 2x from both sides.", hint2: "Subtract 4 from both sides.", hint3: "Divide both sides by 3." },
-            { eq: "3x-8=6x-14", step1: "-8=3x-14", step2: "6=3x", step3: "x=2", hint1: "Subtract 3x from both sides.", hint2: "Add 14 to both sides.", hint3: "Divide both sides by 3." }
-        ]
-    }},
-    { name: "2 (Negative Answers)", problems: {
-        oneStep: [
-            { eq: "x+7=4", answer: "x=-3", hint: "Subtract 7 from both sides." },
-            { eq: "x-2=-5", answer: "x=-3", hint: "Add 2 to both sides." },
-            { eq: "3x=-9", answer: "x=-3", hint: "Divide both sides by 3." },
-            { eq: "x+10=6", answer: "x=-4", hint: "Subtract 10 from both sides." },
-            { eq: "x-5=-8", answer: "x=-3", hint: "Add 5 to both sides." },
-            { eq: "2x=-10", answer: "x=-5", hint: "Divide both sides by 2." },
-            { eq: "x+3=-1", answer: "x=-4", hint: "Subtract 3 from both sides." },
-            { eq: "x-4=-7", answer: "x=-3", hint: "Add 4 to both sides." },
-            { eq: "4x=-12", answer: "x=-3", hint: "Divide both sides by 4." },
-            { eq: "x+8=5", answer: "x=-3", hint: "Subtract 8 from both sides." }
-        ],
-        twoStep: [
-            { eq: "2x+5=-1", step1: "2x=-6", step2: "x=-3", hint1: "Subtract 5 from both sides.", hint2: "Divide both sides by 2." },
-            { eq: "3x-4=-10", step1: "3x=-6", step2: "x=-2", hint1: "Add 4 to both sides.", hint2: "Divide both sides by 3." },
-            { eq: "5x+7=-8", step1: "5x=-15", step2: "x=-3", hint1: "Subtract 7 from both sides.", hint2: "Divide both sides by 5." },
-            { eq: "4x-3=-15", step1: "4x=-12", step2: "x=-3", hint1: "Add 3 to both sides.", hint2: "Divide both sides by 4." },
-            { eq: "2x+8=2", step1: "2x=-6", step2: "x=-3", hint1: "Subtract 8 from both sides.", hint2: "Divide both sides by 2." },
-            { eq: "3x-5=-11", step1: "3x=-6", step2: "x=-2", hint1: "Add 5 to both sides.", hint2: "Divide both sides by 3." },
-            { eq: "6x+4=-8", step1: "6x=-12", step2: "x=-2", hint1: "Subtract 4 from both sides.", hint2: "Divide both sides by 6." },
-            { eq: "5x-2=-17", step1: "5x=-15", step2: "x=-3", hint1: "Add 2 to both sides.", hint2: "Divide both sides by 5." },
-            { eq: "4x+6=-6", step1: "4x=-12", step2: "x=-3", hint1: "Subtract 6 from both sides.", hint2: "Divide both sides by 4." },
-            { eq: "2x-7=-11", step1: "2x=-4", step2: "x=-2", hint1: "Add 7 to both sides.", hint2: "Divide both sides by 2." }
-        ],
-        multiStep: [
-            { eq: "3x+2=x-6", step1: "2x+2=-6", step2: "2x=-8", step3: "x=-4", hint1: "Subtract x from both sides.", hint2: "Subtract 2 from both sides.", hint3: "Divide both sides by 2." },
-            { eq: "4x-3=7x+9", step1: "3x+9=-3", step2: "3x=-12", step3: "x=-4", hint1: "Subtract 4x from both sides.", hint2: "Subtract 9 from both sides.", hint3: "Divide both sides by 3." },
-            { eq: "5x+1=2x-8", step1: "3x+1=-8", step2: "3x=-9", step3: "x=-3", hint1: "Subtract 2x from both sides.", hint2: "Subtract 1 from both sides.", hint3: "Divide both sides by 3." },
-            { eq: "6x-4=3x-10", step1: "3x-4=-10", step2: "3x=-6", step3: "x=-2", hint1: "Subtract 3x from both sides.", hint2: "Add 4 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "7x-2=4x-11", step1: "3x-2=-11", step2: "3x=-9", step3: "x=-3", hint1: "Subtract 4x from both sides.", hint2: "Add 2 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "5x-6=2x-15", step1: "3x-6=-15", step2: "3x=-9", step3: "x=-3", hint1: "Subtract 2x from both sides.", hint2: "Add 6 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "2x+5=5x-4", step1: "5=3x-4", step2: "9=3x", step3: "x=3", hint1: "Subtract 2x from both sides.", hint2: "Add 4 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "3x+4=6x-5", step1: "4=3x-5", step2: "9=3x", step3: "x=3", hint1: "Subtract 3x from both sides.", hint2: "Add 5 to both sides.", hint3: "Divide both sides by 3." },
-            { eq: "4x+2=7x-7", step1: "2=3x-7", step2: "9=3x", step3: "x=3", hint1: "Subtract 4x from both sides.", hint2: "Add 7 to both sides.", hint3: "Divide both sides by 3." }
-        ]
-    }},
-    { name: "3 (Fractions with Positive Answers)", problems: {
-        oneStep: [
-            { eq: "2/3x=4", answer: "x=6", hint: "Multiply by 3 and divide by 2." },
-            { eq: "3/5x=6", answer: "x=10", hint: "Multiply by 5 and divide by 3." },
-            { eq: "1/2x=3", answer: "x=6", hint: "Multiply by 2." },
-            { eq: "4/3x=8", answer: "x=6", hint: "Multiply by 3 and divide by 4." },
-            { eq: "2/5x=4", answer: "x=10", hint: "Multiply by 5 and divide by 2." },
-            { eq: "3/4x=6", answer: "x=8", hint: "Multiply by 4 and divide by 3." },
-            { eq: "1/3x=2", answer: "x=6", hint: "Multiply by 3." },
-            { eq: "5/2x=10", answer: "x=4", hint: "Multiply by 2 and divide by 5." },
-            { eq: "2/7x=4", answer: "x=14", hint: "Multiply by 7 and divide by 2." },
-            { eq: "3/2x=6", answer: "x=4", hint: "Multiply by 2 and divide by 3." }
-        ],
-        twoStep: [
-            { eq: "2/3x+2=6", step1: "2/3x=4", step2: "x=6", hint1: "Subtract 2 from both sides.", hint2: "Multiply by 3 and divide by 2." },
-            { eq: "3/5x-1=5", step1: "3/5x=6", step2: "x=10", hint1: "Add 1 to both sides.", hint2: "Multiply by 5 and divide by 3." },
-            { eq: "1/2x+1=4", step1: "1/2x=3", step2: "x=6", hint1: "Subtract 1 from both sides.", hint2: "Multiply by 2." },
-            { eq: "4/3x-2=6", step1: "4/3x=8", step2: "x=6", hint1: "Add 2 to both sides.", hint2: "Multiply by 3 and divide by 4." },
-            { eq: "2/5x+2=6", step1: "2/5x=4", step2: "x=10", hint1: "Subtract 2 from both sides.", hint2: "Multiply by 5 and divide by 2." },
-            { eq: "3/4x-3=3", step1: "3/4x=6", step2: "x=8", hint1: "Add 3 to both sides.", hint2: "Multiply by 4 and divide by 3." },
-            { eq: "1/3x+1=3", step1: "1/3x=2", step2: "x=6", hint1: "Subtract 1 from both sides.", hint2: "Multiply by 3." },
-            { eq: "5/2x-5=5", step1: "5/2x=10", step2: "x=4", hint1: "Add 5 to both sides.", hint2: "Multiply by 2 and divide by 5." },
-            { eq: "2/7x+2=6", step1: "2/7x=4", step2: "x=14", hint1: "Subtract 2 from both sides.", hint2: "Multiply by 7 and divide by 2." },
-            { eq: "3/2x-3=3", step1: "3/2x=6", step2: "x=4", hint1: "Add 3 to both sides.", hint2: "Multiply by 2 and divide by 3." }
-        ],
-        multiStep: [
-            { eq: "2/3x+1=1/3x+2", step1: "2/3x-1/3x=2-1", step2: "1/3x=1", step3: "x=3", hint1: "Subtract 1/3x and 1 from both sides.", hint2: "Simplify: 2/3x-1/3x=1/3x, then multiply by 3." },
-            { eq: "3/5x-1=2/5x+2", step1: "3/5x-2/5x=2+1", step2: "1/5x=3", step3: "x=15", hint1: "Subtract 2/5x and add 1 to both sides.", hint2: "Simplify: 3/5x-2/5x=1/5x, then multiply by 5." },
-            { eq: "4/3x+2=1/3x+6", step1: "4/3x-1/3x=6-2", step2: "3/3x=4", step3: "x=4", hint1: "Subtract 1/3x and 2 from both sides.", hint2: "Simplify: 4/3x-1/3x=3/3x, then multiply by 3 and divide by 3." },
-            { eq: "2/7x-1=1/7x+1", step1: "2/7x-1/7x=1+1", step2: "1/7x=2", step3: "x=14", hint1: "Subtract 1/7x and add 1 to both sides.", hint2: "Simplify: 2/7x-1/7x=1/7x, then multiply by 7." },
-            { eq: "3/2x+2=1/2x+4", step1: "3/2x-1/2x=4-2", step2: "2/2x=2", step3: "x=2", hint1: "Subtract 1/2x and 2 from both sides.", hint2: "Simplify: 3/2x-1/2x=2/2x, then multiply by 2 and divide by 2." },
-            { eq: "2/5x-2=1/5x-1", step1: "2/5x-1/5x=-1+2", step2: "1/5x=1", step3: "x=5", hint1: "Subtract 1/5x and add 2 to both sides.", hint2: "Simplify: 2/5x-1/5x=1/5x, then multiply by 5." },
-            { eq: "5/4x+1=3/4x+2", step1: "5/4x-3/4x=2-1", step2: "2/4x=1", step3: "x=2", hint1: "Subtract 3/4x and 1 from both sides.", hint2: "Simplify: 5/4x-3/4x=2/4x, then multiply by 4 and divide by 2." },
-            { eq: "3/7x-1=2/7x+1", step1: "3/7x-2/7x=1+1", step2: "1/7x=2", step3: "x=14", hint1: "Subtract 2/7x and add 1 to both sides.", hint2: "Simplify: 3/7x-2/7x=1/7x, then multiply by 7." },
-            { eq: "4/5x+2=3/5x+4", step1: "4/5x-3/5x=4-2", step2: "1/5x=2", step3: "x=10", hint1: "Subtract 3/5x and 2 from both sides.", hint2: "Simplify: 4/5x-3/5x=1/5x, then multiply by 5." },
-            { eq: "5/3x-2=2/3x+4", step1: "5/3x-2/3x=4+2", step2: "3/3x=6", step3: "x=6", hint1: "Subtract 2/3x and add 2 to both sides.", hint2: "Simplify: 5/3x-2/3x=3/3x, then multiply by 3 and divide by 3." }
-        ]
-    }},
-    { name: "4 (Mixed)", problems: {} }
-];
-
-levels[3].problems.oneStep = [...levels[0].problems.oneStep, ...levels[1].problems.oneStep, ...levels[2].problems.oneStep];
-levels[3].problems.twoStep = [...levels[0].problems.twoStep, ...levels[1].problems.twoStep, ...levels[2].problems.twoStep];
-levels[3].problems.multiStep = [...levels[0].problems.multiStep, ...levels[1].problems.multiStep, ...levels[2].problems.multiStep];
-const mixedProblems = [
-    ...levels[3].problems.oneStep.map(p => ({ eq: p.eq, answer: p.answer })),
-    ...levels[3].problems.twoStep.map(p => ({ eq: p.eq, answer: p.step2 })),
-    ...levels[3].problems.multiStep.map(p => ({ eq: p.eq, answer: p.step3 }))
-];
+let levels = []; // Will be loaded from problems.json
+let mixedProblems = []; // Will be computed after loading levels
 
 let currentOneStep, currentTwoStep, currentMultiStep, currentMixed;
 
@@ -173,11 +49,11 @@ function resetGame() {
 
 function clearAllData() {
     if (confirm("Are you sure you want to wipe all progress? This can’t be undone!")) {
-        localStorage.clear(); // Clears all local storage data
+        localStorage.clear();
         alert("All progress has been wiped!");
-        resetGame(); // Reset the current game state too
-        currentUser = null; // Clear current user
-        promptForUsername(); // Prompt for a new user
+        resetGame();
+        currentUser = null;
+        promptForUsername();
     }
 }
 
@@ -227,7 +103,7 @@ function promptForUsername() {
         if (username) {
             currentUser = username.trim();
             localStorage.setItem('lastUser', currentUser);
-            saveUserProgress(); // Save new user
+            saveUserProgress();
             loadUserProgress();
         } else {
             alert('Please enter a valid username to start.');
@@ -497,14 +373,36 @@ function checkMixed() {
     }
 }
 
+async function loadProblems() {
+    try {
+        const response = await fetch('problems.json');
+        if (!response.ok) throw new Error('Failed to load problems.json');
+        levels = await response.json();
+        // Populate Level 4 (Mixed) problems
+        levels[3].problems.oneStep = [...levels[0].problems.oneStep, ...levels[1].problems.oneStep, ...levels[2].problems.oneStep];
+        levels[3].problems.twoStep = [...levels[0].problems.twoStep, ...levels[1].problems.twoStep, ...levels[2].problems.twoStep];
+        levels[3].problems.multiStep = [...levels[0].problems.multiStep, ...levels[1].problems.multiStep, ...levels[2].problems.multiStep];
+        mixedProblems = [
+            ...levels[3].problems.oneStep.map(p => ({ eq: p.eq, answer: p.answer })),
+            ...levels[3].problems.twoStep.map(p => ({ eq: p.eq, answer: p.step2 })),
+            ...levels[3].problems.multiStep.map(p => ({ eq: p.eq, answer: p.step3 }))
+        ];
+    } catch (error) {
+        console.error('Error loading problems:', error);
+        alert('Couldn’t load problems. Please check your connection or file.');
+    }
+}
+
 function initialize() {
     console.log('Initializing game...');
-    promptForUsername();
-    loadOneStepProblem();
-    loadTwoStepProblem();
-    loadMultiStepProblem();
-    loadMixedProblem();
-    updateProgress();
+    loadProblems().then(() => {
+        promptForUsername();
+        loadOneStepProblem();
+        loadTwoStepProblem();
+        loadMultiStepProblem();
+        loadMixedProblem();
+        updateProgress();
+    });
 }
 
 let activeInput = null;
@@ -512,7 +410,7 @@ let activeInput = null;
 function showKeyboard(input) {
     activeInput = input;
     const keyboard = document.getElementById('custom-keyboard');
-    keyboard.style.display = 'flex'; // Use flex for centering
+    keyboard.style.display = 'flex';
 }
 
 function hideKeyboard() {
