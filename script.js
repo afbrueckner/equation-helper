@@ -7,8 +7,8 @@ let streak = 0;
 const streakThreshold = 5;
 let activeStage = 'one-step';
 let currentUser = null;
-let levels = []; // Will be loaded from problems.json
-let mixedProblems = []; // Will be computed after loading levels
+let levels = []; // Loaded from problems.json
+let mixedProblems = []; // Computed after loading levels
 
 let currentOneStep, currentTwoStep, currentMultiStep, currentMixed;
 
@@ -152,7 +152,7 @@ function switchUser() {
 }
 
 function loadOneStepProblem() {
-    currentOneStep = levels[currentLevel - 1].problems.oneStep[Math.floor(Math.random() * 10)];
+    currentOneStep = levels[currentLevel - 1].problems.oneStep[Math.floor(Math.random() * levels[currentLevel - 1].problems.oneStep.length)];
     const eqElement = document.getElementById('one-step-eq');
     const hintElement = document.getElementById('one-step-hint');
     if (eqElement && hintElement) {
@@ -192,7 +192,7 @@ function checkOneStep() {
 }
 
 function loadTwoStepProblem() {
-    currentTwoStep = levels[currentLevel - 1].problems.twoStep[Math.floor(Math.random() * 10)];
+    currentTwoStep = levels[currentLevel - 1].problems.twoStep[Math.floor(Math.random() * levels[currentLevel - 1].problems.twoStep.length)];
     const eqElement = document.getElementById('two-step-eq');
     const eq2Element = document.getElementById('two-step-eq2');
     const hint1Element = document.getElementById('two-step-hint1');
@@ -253,7 +253,7 @@ function checkTwoStep2() {
 }
 
 function loadMultiStepProblem() {
-    currentMultiStep = levels[currentLevel - 1].problems.multiStep[Math.floor(Math.random() * 10)];
+    currentMultiStep = levels[currentLevel - 1].problems.multiStep[Math.floor(Math.random() * levels[currentLevel - 1].problems.multiStep.length)];
     const eqElement = document.getElementById('multi-step-eq');
     const eq2Element = document.getElementById('multi-step-eq2');
     const eq3Element = document.getElementById('multi-step-eq3');
@@ -390,19 +390,23 @@ async function loadProblems() {
     } catch (error) {
         console.error('Error loading problems:', error);
         alert('Couldn’t load problems. Please check your connection or file.');
+        throw error; // Stop initialization if loading fails
     }
 }
 
-function initialize() {
+async function initialize() {
     console.log('Initializing game...');
-    loadProblems().then(() => {
+    try {
+        await loadProblems(); // Wait for problems to load
         promptForUsername();
         loadOneStepProblem();
         loadTwoStepProblem();
         loadMultiStepProblem();
         loadMixedProblem();
         updateProgress();
-    });
+    } catch (error) {
+        console.error('Initialization failed:', error);
+    }
 }
 
 let activeInput = null;
