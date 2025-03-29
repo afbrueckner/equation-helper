@@ -171,6 +171,16 @@ function resetGame() {
     updateProgress();
 }
 
+function clearAllData() {
+    if (confirm("Are you sure you want to wipe all progress? This can’t be undone!")) {
+        localStorage.clear(); // Clears all local storage data
+        alert("All progress has been wiped!");
+        resetGame(); // Reset the current game state too
+        currentUser = null; // Clear current user
+        promptForUsername(); // Prompt for a new user
+    }
+}
+
 function changeLevel() {
     currentLevel = parseInt(document.getElementById('level-select').value);
     activeStage = 'one-step';
